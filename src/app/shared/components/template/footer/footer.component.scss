@@ -1,0 +1,21 @@
+footer{
+    position: relative;
+    height: 1.5rem;
+    width: 100%;
+}
+
+footer > div:first-child{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background-color: #1c1c1c;
+    color: white;
+
+}
+
+footer div.stylingCopyright{
+    height: 100%;
+    font-size: 0.8rem;
+}
