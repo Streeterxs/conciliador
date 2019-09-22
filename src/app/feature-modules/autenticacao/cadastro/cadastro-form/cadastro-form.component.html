@@ -1,0 +1,95 @@
+<div id="" class="d-flex align-items-center justify-content-center formSection">
+    <div class="w-50">
+        <h1 class="h1">Register</h1>
+        <form [formGroup]="cadastroForm" (ngSubmit)="formSubmit()">
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-3 col-form-label">Nome</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" formControlName="nome" id="inputUsername3" placeholder="nome">
+                    <div *ngIf="cadastroForm.controls.nome?.invalid && (cadastroForm.controls.nome?.dirty || cadastroForm.controls.nome?.touched)"
+                        class="alert alert-danger">
+
+                        <div *ngIf="cadastroForm.controls.nome?.errors.required">
+                            Nome é obrigatório.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-3 col-form-label">CPF</label>
+                <div class="col-sm-9">
+                <input type="text" class="form-control" formControlName="cpf" id="inputCpf3" placeholder="cpf">
+                <div *ngIf="cadastroForm.controls.cpf?.invalid && (cadastroForm.controls.cpf?.dirty || cadastroForm.controls.cpf?.touched)"
+                    class="alert alert-danger">
+
+                    <div *ngIf="cadastroForm.controls.cpf?.errors.required">
+                        CPF é obrigatório.
+                    </div>
+                    <div *ngIf="cadastroForm.controls.cpf?.errors.minlength">
+                        CPF precisa ter 11 caracteres.
+                    </div>
+                    <div *ngIf="cadastroForm.controls.cpf?.errors.maxlength">
+                        CPF precisa ter 11 caracteres.
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-9">
+                <input type="email" class="form-control" formControlName="email" id="inputEmail3" placeholder="Email">
+                <div *ngIf="cadastroForm.controls.email?.invalid && (cadastroForm.controls.email?.dirty || cadastroForm.controls.email?.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="cadastroForm.controls.email?.errors.required">
+                        Email é obrigatório.
+                    </div>
+                    <div *ngIf="cadastroForm.controls.email?.errors.email">
+                        Email precisa ser válido.
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Senha</label>
+                <div class="col-sm-9">
+                <input type="password" class="form-control" formControlName="password" id="inputPassword3" placeholder="Password">
+                <div *ngIf="cadastroForm.controls.password?.invalid && (cadastroForm.controls.password?.dirty || cadastroForm.controls.password?.touched)"
+                    class="alert alert-danger">
+
+                    <div *ngIf="cadastroForm.controls.password?.errors.required">
+                        Senha é obrigatória.
+                    </div>
+                    <div *ngIf="cadastroForm.controls.password?.errors.minlength">
+                        Este campo precisa ter pelo menos 8 caracteres.
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Repetir Senha</label>
+                <div class="col-sm-9">
+                <input type="password" class="form-control" formControlName="passwordRepeat" id="inputPasswordRepeat3" placeholder="Password Repeat">
+                <div *ngIf="cadastroForm.controls.passwordRepeat?.invalid && (cadastroForm.controls.passwordRepeat?.dirty || cadastroForm.controls.passwordRepeat?.touched)"
+                    class="alert alert-danger">
+
+                    <div *ngIf="cadastroForm.controls.passwordRepeat?.errors.required">
+                        É obrigatório repetir a senha.
+                    </div>
+                    <div *ngIf="cadastroForm.controls.passwordRepeat?.errors.minlength">
+                        Este campo precisa ter pelo menos 8 caracteres.
+                    </div>
+                    <div *ngIf="cadastroForm.controls.passwordRepeat?.errors.noPassswordMatch">
+                        Senhas não são iguais.
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-12 d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-primary" [disabled]="!cadastroForm.valid">Enviar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+      

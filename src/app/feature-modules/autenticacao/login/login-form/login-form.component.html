@@ -1,0 +1,26 @@
+<div id="" class="d-flex align-items-center justify-content-center formSection">
+    <div class="w-50">
+        <h1 class="h1">Login</h1>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">CPF</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="cpf" id="inputEmail3" placeholder="cpf">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Senha</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" formControlName="senha" id="inputPassword3" placeholder="senha">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-12 d-flex align-items-center justify-content-end">
+                <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Entrar</button>
+            </div>
+        </div>
+        </form>
+        <p>Não tem uma conta? <a routerLink="/conciliador/autenticacao/cadastro">Cadastrar</a></p>
+    </div>
+</div>
+  
