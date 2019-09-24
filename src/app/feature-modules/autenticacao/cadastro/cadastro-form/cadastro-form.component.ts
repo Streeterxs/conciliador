@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -9,13 +9,14 @@ import { FormGroup } from '@angular/forms';
 export class CadastroFormComponent implements OnInit {
   @Input() cadastroForm?: FormGroup;
 
+  @Output() emitForm = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
   }
 
   formSubmit(){
-    alert("Enviado")
+    this.emitForm.emit("");
   }
 
 }

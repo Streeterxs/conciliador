@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { passwordRepeatValidator } from '../password-repeat.directive';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
@@ -10,7 +11,7 @@ import { passwordRepeatValidator } from '../password-repeat.directive';
 export class CadastroComponent implements OnInit {
   cadastroForm: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(private _formBuilder: FormBuilder, private _router: Router) { }
 
   ngOnInit() {
     this.cadastroForm = this._formBuilder.group({
@@ -21,9 +22,12 @@ export class CadastroComponent implements OnInit {
       passwordRepeat: ['', [Validators.required, Validators.minLength(8)]]
 
     }, {
-      validator: passwordRepeatValidator
-    }
-)
+        validator: passwordRepeatValidator
+      }
+    )
   }
-
+  formSubmited(){
+    alert("Cadastro enviado!");
+    this._router.navigate(["conciliador", "login"])
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { FormGroup } from '@angular/forms';
 
@@ -10,13 +10,16 @@ import { FormGroup } from '@angular/forms';
 export class LoginFormComponent implements OnInit {
   @Input() loginForm?: FormGroup
 
+  @Output() loginEmit = new EventEmitter;
   constructor() { }
 
   ngOnInit() {
   }
 
   onSubmit(){
-    alert("Logou");
+    this.loginEmit.emit("");
   }
-
+  teste(event){
+    console.log(event);
+  }
 }
