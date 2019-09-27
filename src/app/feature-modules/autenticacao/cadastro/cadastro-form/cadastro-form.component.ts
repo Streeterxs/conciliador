@@ -16,6 +16,7 @@ export class CadastroFormComponent implements OnInit {
   }
 
   formSubmit(){
+    console.log("entrou aqui");
     this.emitForm.emit("");
   }
 

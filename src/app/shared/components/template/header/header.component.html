@@ -16,7 +16,13 @@
                     <a class="nav-link navbarLink">Pricing</a>
                 </li>
             </ul>
-            <a class="navbarLink" routerLink="/conciliador/autenticacao/login">Login</a>
+            <li *ngIf="userIsLogged; then loggedTemplate else loginTemplate"></li>
+            <ng-template #loggedTemplate>
+                Bem vindo, {{userName}}
+            </ng-template>
+            <ng-template #loginTemplate>
+                <a class="navbarLink" routerLink="/conciliador/autenticacao/login">Login</a>
+            </ng-template>            
         </div>
     </div>
 </nav>

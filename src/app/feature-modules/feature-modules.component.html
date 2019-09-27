@@ -1,3 +1,6 @@
 <app-page>
     <router-outlet></router-outlet>
 </app-page>
+<app-message *ngIf="messageObj?.isToShow" [messageType]="messageObj?.messageType" [@messageAnimation]>
+    <strong>{{messageObj?.strongText}}</strong>{{messageObj?.messageText}}
+</app-message>

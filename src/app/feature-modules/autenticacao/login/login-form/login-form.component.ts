@@ -19,7 +19,4 @@ export class LoginFormComponent implements OnInit {
   onSubmit(){
     this.loginEmit.emit("");
   }
-  teste(event){
-    console.log(event);
-  }
 }

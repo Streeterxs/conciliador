@@ -1,0 +1,24 @@
+.Message{
+    position: fixed;
+    top: 3.2rem;
+    right: 0rem;
+    width: 100vw;
+    text-align: center;
+    box-sizing: border-box;
+}
+@media (min-width: 768px) { 
+    .Message{
+        right: 0.5rem;
+        width: 50vw;
+    }
+ }
+@media (min-width: 992px) { 
+    .Message{
+        width: 40vw;
+    }
+ }
+@media (min-width: 1200px) { 
+    .Message{
+        width: 30vw;
+    }
+ }

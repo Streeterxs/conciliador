@@ -20,6 +20,7 @@ export class RequestInterceptor implements HttpInterceptor {
             const tokenService = this._injector.get(TokenService)
        
             if(tokenService.hasToken("accessToken")) {
+                console.log("Interceptor entrou hehe");                
                 const token = tokenService.getToken("accessToken");
                 req = req.clone({
                     setHeaders: {

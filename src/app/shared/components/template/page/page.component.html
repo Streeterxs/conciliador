@@ -1,5 +1,5 @@
-<app-header></app-header>
-<section class="container-fluid sectionContent">
+<app-header [userIsLogged]="userIsLogged" [userName]="userName"></app-header>
+<section class="container sectionContent">
     <ng-content></ng-content>
 </section>
 <app-footer></app-footer>
