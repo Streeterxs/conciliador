@@ -8,7 +8,7 @@ const routes: Routes = [
   {path:'', component: SalasComponent, children:[
     { path: 'lista', component: ListaComponent },
     { path: 'criar', component: CriarComponent }
-  ]}
+  ], data:{path:'Salas'}}
 ];
 
 @NgModule({

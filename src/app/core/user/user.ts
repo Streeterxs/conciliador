@@ -4,5 +4,6 @@ export interface User {
     nome?: string;
     email?: string;
     is_admin?: boolean;
+    is_active?: boolean;
     is_moderador?: boolean;
 }

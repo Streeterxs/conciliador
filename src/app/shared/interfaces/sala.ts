@@ -1,10 +1,10 @@
-import { Usuario } from './usuario';
 import { Mensagem } from './mensagem';
+import { User } from '../../core/user/user';
 
-export interface Sala{
+export interface Sala {
     id?: number;
     descricao?: string;
-    usuarios?: Usuario[];
+    integrantes?: User[];
     data?: Date;
-    mensagens?: Mensagem[];
+    messages?: Mensagem[];
 }

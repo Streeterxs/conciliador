@@ -6,19 +6,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link navbarLink" routerLink="/home">Home <span class="sr-only">(current)</span></a>
+                <li [ngClass]="active==='Painel'? 'nav-item active': 'nav-item'">
+                    <a class="nav-link navbarLink" routerLink="/home">Painel</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link navbarLink">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link navbarLink">Pricing</a>
+                <li [ngClass]="active==='Salas'? 'nav-item active': 'nav-item'">
+                    <a class="nav-link navbarLink" routerLink="/conciliador/salas/lista">Salas</a>
                 </li>
             </ul>
             <li *ngIf="userIsLogged; then loggedTemplate else loginTemplate"></li>
             <ng-template #loggedTemplate>
-                Bem vindo, {{userName}}
+                <div>Bem vindo, {{userName}}. <a (click)="logoutEmit()" class="m-auto">sair</a></div>
             </ng-template>
             <ng-template #loginTemplate>
                 <a class="navbarLink" routerLink="/conciliador/autenticacao/login">Login</a>

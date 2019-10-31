@@ -1,1 +1,21 @@
-<p>chat-integrantes works!</p>
+<div class="integrantes">
+    <h4>Integrantes</h4>
+    <ul>
+        <li>
+            <h6>Moderadores</h6>
+            <ul>
+                <li *ngFor="let moderador of moderadores"> 
+                    {{moderador?.nome}}
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h6>Comum</h6>
+            <ul>
+                <li *ngFor="let comum of usuariosComuns">
+                    {{comum?.nome}}
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

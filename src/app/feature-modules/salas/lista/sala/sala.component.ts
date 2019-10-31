@@ -7,12 +7,11 @@ import { Sala } from 'src/app/shared/interfaces/sala';
   styleUrls: ['./sala.component.scss']
 })
 export class SalaComponent implements OnInit {
-  @Input() sala: Sala
+  @Input() sala: Sala;
 
   constructor() { }
 
   ngOnInit() {
-    console.log(this.sala);
   }
 
 }

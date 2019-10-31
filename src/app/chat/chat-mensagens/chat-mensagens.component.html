@@ -1,1 +1,3 @@
-<p>chat-mensagens works!</p>
+<div class="mensagens">
+    <app-mensagem *ngFor="let mensagem of mensagens" [mensagem]="mensagem" class="position-relative mensagemWrapper"></app-mensagem>
+</div>

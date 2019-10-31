@@ -19,7 +19,6 @@ import { Message } from '../core/message/message';
           ':leave', [
             style({transform: 'translateY(0)', 'opacity': 1}),
             animate('0.3s ease-out', style({transform: 'translateY(-20%)', 'opacity': 0})),
-            
           ]
         ),
         transition(
@@ -27,24 +26,24 @@ import { Message } from '../core/message/message';
             style({transform: 'translateY(-20%)', 'opacity': 0}),
             animate('0.3s ease-in', style({transform: 'translateY(0)', 'opacity': 1}))
           ]
-        )        
+        )
       ]
     )]
   })
 export class FeatureModulesComponent implements OnInit {
   messageObj: Message;
 
-  messageSubscription: Subscription
+  messageSubscription: Subscription;
 
   constructor(private _messageService: MessageService) { }
 
   ngOnInit() {
     this.messageSubscription = this._messageService.messageObservable.subscribe(message => {
-      this.messageObj = {...message}
-      setTimeout(()=>{
+      this.messageObj = {...message};
+      setTimeout(() => {
         this._messageService.clearMessage();
-      }, 4000)
-    })
+      }, 4000);
+    });
   }
 
 

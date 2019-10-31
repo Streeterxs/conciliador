@@ -1,0 +1,38 @@
+.caixaMensagemParaDono{
+    background-color:#2A7F62;
+    margin: 1rem;
+    border-radius: 0.5rem;
+    min-width: 20vw;
+    max-width: 40vw;
+    color: white;
+    box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.3);
+}
+
+.caixaMensagemParaDono h4{
+}
+
+.caixaMensagemOutros{
+    background-color:#042A2B;
+    margin: 1rem;
+    border-radius: 0.5rem;
+    min-width: 20vw;
+    max-width: 40vw;
+    color: white;
+    box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.3);
+}
+
+.caixaMensagemOutros h4{
+}
+
+.card{
+    border: none;
+}
+
+.card-text{
+    word-wrap: break-word;
+}
+
+.card-subtitle{
+    color: rgba($color: #FFFFFF, $alpha: 0.8);
+    font-size: 0.95rem;
+}

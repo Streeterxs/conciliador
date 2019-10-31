@@ -15,8 +15,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(
-    private _formBuider: FormBuilder, 
-    private _router: Router, 
+    private _formBuider: FormBuilder,
+    private _router: Router,
     private _authenticationService: AuthenticationService,
     private _messageService: MessageService) { }
 
@@ -28,14 +28,15 @@ export class LoginComponent implements OnInit {
   }
 
   loginSubmit(){
-    this._authenticationService.authenticate(this.loginForm.controls.cpf.value, this.loginForm.controls.senha.value).subscribe(() => {}, err => {}, ()=> {
+    this._authenticationService.authenticate(this.loginForm.controls.cpf.value, this.loginForm.controls.senha.value)
+    .subscribe(() => {}, err => {}, () => {
       const message: Message = {
-        strongText: "",
-        messageText: "Login feito com sucesso!",
+        strongText: '',
+        messageText: 'Login feito com sucesso!',
         messageType: AlertType.SUCCESS,
         isToShow: true
-      }
-      this._messageService.newMessage = message
-    })
+      };
+      this._messageService.newMessage = message;
+    });
   }
 }

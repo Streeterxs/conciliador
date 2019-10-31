@@ -1,8 +1,8 @@
-import { Usuario } from './usuario';
+import { User } from '../../core/user/user';
 
-export class Mensagem{
+export class Mensagem {
      id?: number;
-     usuario?: Usuario;
-     data?: Date;
-     mensagens?: string;
+     owner?: number;
+     date?: Date;
+     texto?: string;
 }

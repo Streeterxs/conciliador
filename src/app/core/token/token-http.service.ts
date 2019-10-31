@@ -8,7 +8,7 @@ import { TokenService } from './token.service';
 
 import { environment } from '../../../environments/environment';
 
-const API_URL = environment.ApiUrl;
+const API_URL = environment.ApiLocal;
 
 @Injectable({
   providedIn: 'root'

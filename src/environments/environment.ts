@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  ApiUrl: "https://firmeacordos-teste.herokuapp.com/api",
+  ApiUrl: 'https://firmeacordos-teste.herokuapp.com/api',
+  ApiLocal: 'http://192.168.1.3/api'
 };
 
 /*

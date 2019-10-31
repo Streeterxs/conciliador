@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { ChatRoutingModule } from './chat-routing.module';
 import { ChatComponent } from './chat.component';
@@ -8,6 +9,7 @@ import { ChatIntegrantesComponent } from './chat-integrantes/chat-integrantes.co
 import { ChatResumoAcordosComponent } from './chat-resumo-acordos/chat-resumo-acordos.component';
 import { ChatMensagensComponent } from './chat-mensagens/chat-mensagens.component';
 import { ChatChatBoxComponent } from './chat-chat-box/chat-chat-box.component';
+import { MensagemComponent } from './chat-mensagens/mensagem/mensagem.component';
 
 @NgModule({
   declarations: [
@@ -16,11 +18,13 @@ import { ChatChatBoxComponent } from './chat-chat-box/chat-chat-box.component';
     ChatIntegrantesComponent,
     ChatResumoAcordosComponent,
     ChatMensagensComponent,
-    ChatChatBoxComponent
+    ChatChatBoxComponent,
+    MensagemComponent
   ],
   imports: [
     CommonModule,
-    ChatRoutingModule
+    ChatRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class ChatModule { }
