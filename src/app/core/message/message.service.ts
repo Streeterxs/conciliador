@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import {Message} from './message'
+import {Message} from './message';
 
 @Injectable({
   providedIn: 'root'
@@ -19,19 +19,19 @@ export class MessageService {
   messageObservable$ = this._messageBehaviorSubject.asObservable();
   constructor() { }
 
-  get messageObservable(): Observable<Message>{
+  get messageObservable(): Observable<Message> {
     return this.messageObservable$;
-  }  
-
-  set newMessage(value: Message){
-    if(!this._haveMessageOcurring){
-      this._messageBehaviorSubject.next(value);
-      this.changeMessageOcurringState(true);
-    }    
   }
 
-  clearMessage(){
-    if(this._haveMessageOcurring){
+  set newMessage(value: Message) {
+    if (!this._haveMessageOcurring) {
+      this._messageBehaviorSubject.next(value);
+      this.changeMessageOcurringState(true);
+    }
+  }
+
+  clearMessage() {
+    if (this._haveMessageOcurring) {
       this._messageBehaviorSubject.next({
         strongText: '',
         messageText: '',
@@ -39,10 +39,10 @@ export class MessageService {
         isToShow: false
       });
       this.changeMessageOcurringState(false);
-    }        
+    }
   }
 
-  private changeMessageOcurringState(value){
+  private changeMessageOcurringState(value) {
     this._haveMessageOcurring = value;
   }
 }

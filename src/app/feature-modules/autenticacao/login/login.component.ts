@@ -24,12 +24,13 @@ export class LoginComponent implements OnInit {
     this.loginForm = this._formBuider.group({
       cpf: ['', Validators.required],
       senha: ['', Validators.required]
-    })
+    });
   }
 
-  loginSubmit(){
+  loginSubmit() {
     this._authenticationService.authenticate(this.loginForm.controls.cpf.value, this.loginForm.controls.senha.value)
-    .subscribe(() => {}, err => {}, () => {
+    .subscribe(user => {
+    }, err => {}, () => {
       const message: Message = {
         strongText: '',
         messageText: 'Login feito com sucesso!',
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
         isToShow: true
       };
       this._messageService.newMessage = message;
+      this._router.navigate(['conciliador']);
     });
   }
 }

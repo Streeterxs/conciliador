@@ -10,15 +10,14 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { SalasRoutingModule } from './salas-routing.module';
 import { ListaComponent } from './lista/lista.component';
 import { CriarComponent } from './criar/criar.component';
-import { SalaComponent } from './lista/sala/sala.component';
 import { SalasComponent } from './salas.component';
 import { SalaCriacaoFormComponent } from './criar/sala-criacao-form/sala-criacao-form.component';
+import { SalaModule } from 'src/app/shared/components/sala/sala.module';
 
 @NgModule({
   declarations: [
     ListaComponent,
     CriarComponent,
-    SalaComponent,
     SalasComponent,
     SalaCriacaoFormComponent
   ],
@@ -30,7 +29,8 @@ import { SalaCriacaoFormComponent } from './criar/sala-criacao-form/sala-criacao
     NgbTimepickerModule,
     NgbTypeaheadModule,
     FontAwesomeModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    SalaModule
   ]
 })
 export class SalasModule { }

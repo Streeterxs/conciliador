@@ -1,6 +1,4 @@
-import { User } from '../../core/user/user';
-
-export class Mensagem {
+export interface Mensagem {
      id?: number;
      owner?: number;
      date?: Date;

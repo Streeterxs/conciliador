@@ -7,15 +7,15 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <li [ngClass]="active==='Painel'? 'nav-item active': 'nav-item'">
-                    <a class="nav-link navbarLink" routerLink="/home">Painel</a>
+                    <a class="nav-link navbarLink" routerLink="/conciliador/painel">Painel</a>
                 </li>
-                <li [ngClass]="active==='Salas'? 'nav-item active': 'nav-item'">
+                <li *ngIf="loggedUser?.is_admin || loggedUser?.is_moderador" [ngClass]="active==='Salas'? 'nav-item active': 'nav-item'">
                     <a class="nav-link navbarLink" routerLink="/conciliador/salas/lista">Salas</a>
                 </li>
             </ul>
             <li *ngIf="userIsLogged; then loggedTemplate else loginTemplate"></li>
             <ng-template #loggedTemplate>
-                <div>Bem vindo, {{userName}}. <a (click)="logoutEmit()" class="m-auto">sair</a></div>
+                <div>Bem vindo, {{loggedUser.nome}}. <a (click)="logoutEmit()" class="m-auto">sair</a></div>
             </ng-template>
             <ng-template #loginTemplate>
                 <a class="navbarLink" routerLink="/conciliador/autenticacao/login">Login</a>

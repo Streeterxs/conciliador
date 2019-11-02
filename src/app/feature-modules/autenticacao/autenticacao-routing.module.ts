@@ -4,12 +4,14 @@ import { LoginComponent } from './login/login.component';
 import { AutenticacaoComponent } from './autenticacao.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 
+import { NonUserOnlyGuard } from '../../core/guards/non-user-only.guard';
+
 const routes: Routes = [
-  {path:'', component: AutenticacaoComponent, children: [
-    { path: 'login', component: LoginComponent},
-    { path: 'cadastro', component: CadastroComponent},
-  ]},
-  {path:'**', redirectTo: ''}
+  {path: '', component: AutenticacaoComponent, children: [
+    { path: 'login', component: LoginComponent, canActivate: [NonUserOnlyGuard]},
+    { path: 'cadastro', component: CadastroComponent, canActivate: [NonUserOnlyGuard]},
+  ], canActivate: [NonUserOnlyGuard]},
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({

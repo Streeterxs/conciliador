@@ -1,0 +1,13 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Sala {{sala?.id}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{sala?.descricao}}</h6>
+        <p class="card-text">0/{{sala?.integrantes.length}}</p>
+    </div>
+    <div class="card-footer">
+        <div class="card-footer-wrapper">
+            <button class="btn btn-primary mx-3 shadowForButtons" [disabled]="(!loggedUser?.is_admin && !loggedUser?.is_moderator) && !sala?.is_active">Integrantes</button>
+            <button [routerLink]="['/chat', sala?.id]" [disabled]="(!loggedUser?.is_admin && !loggedUser?.is_moderator) && !sala?.is_active" class="btn btn-success shadowForButtons">Entrar</button>
+        </div>
+    </div>
+</div>

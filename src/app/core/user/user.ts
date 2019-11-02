@@ -5,5 +5,6 @@ export interface User {
     email?: string;
     is_admin?: boolean;
     is_active?: boolean;
-    is_moderador?: boolean;
+    is_moderator?: boolean;
+    is_connected?: boolean;
 }

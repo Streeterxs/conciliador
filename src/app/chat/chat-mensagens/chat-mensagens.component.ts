@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Mensagem } from '../../shared/interfaces/mensagem';
+import { User } from '../../core/user/user';
 
 @Component({
   selector: 'app-chat-mensagens',
@@ -9,10 +10,11 @@ import { Mensagem } from '../../shared/interfaces/mensagem';
 })
 export class ChatMensagensComponent implements OnInit {
   @Input() mensagens?: Mensagem[] = [];
+  @Input() loggedUser?: User;
+  
   constructor() { }
 
   ngOnInit() {
-    console.log(this.mensagens);
   }
 
 }

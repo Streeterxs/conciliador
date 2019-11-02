@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RoutingService } from 'src/app/core/routing/routing.service';
+
+import { RoutingService } from '../../../../core/routing/routing.service';
+import { User } from '../../../../core/user/user';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +11,7 @@ import { RoutingService } from 'src/app/core/routing/routing.service';
 })
 export class HeaderComponent implements OnInit {
   @Input() userIsLogged? = false;
-  @Input() userName?;
+  @Input() loggedUser?: User;
 
   active = null;
 

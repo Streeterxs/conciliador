@@ -26,4 +26,12 @@ export class SalasHttpService {
   criarSala(newSala: Sala): Observable<Sala> {
     return this.http.post<Sala>(API_URL + `/salas-chat/`, newSala);
   }
+
+  ativarSala(idSala): Observable<Sala> {
+    return this.http.patch<Sala>(API_URL + `/salas-chat/${idSala}/`, {is_active: true});
+  }
+
+  receberTodasAsSalasDeUmIntegrante(idIntegrante): Observable<Sala[]> {
+    return this.http.get<Sala[]>(API_URL + `/salas-chat-user/${idIntegrante}/`);
+  }
 }

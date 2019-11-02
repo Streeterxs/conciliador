@@ -15,8 +15,7 @@ export class CadastroFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  formSubmit(){
-    console.log("entrou aqui");
+  formSubmit() {
     this.emitForm.emit("");
   }
 

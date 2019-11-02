@@ -22,12 +22,11 @@ export class TokenHttpService {
 
   refreshToken(): Observable<any>{
     const refreshToken = this.tokenService.getToken("refreshToken");
-    console.log("entrou nessa bagaça")
     return this.http.post(
-      API_URL + '/token/refresh/', 
+      API_URL + '/token/refresh/',
       { refresh: refreshToken },
       { observe: 'response' }
-    ).pipe(share(),tap(res => {
+    ).pipe(share(), tap(res => {
       const authToken = JSON.stringify(res.body.valueOf());
       this.tokenService.setToken("accessToken", JSON.parse(authToken).access);
       this.tokenService.setToken("refreshToken", JSON.parse(authToken).refresh);
@@ -39,7 +38,7 @@ export class TokenHttpService {
     return this.http.post(
       API_URL + '/token/verify/',
       { token: accessToken },
-      { observe: 'response'} 
+      { observe: 'response'}
     )
   }
 }

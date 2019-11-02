@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -7,18 +7,23 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./chat-chat-box.component.scss']
 })
 export class ChatChatBoxComponent implements OnInit {
+  @Input() isActive?: boolean = false;
 
-  chatBoxSendForm: FormGroup
+  chatBoxSendForm: FormGroup;
 
   constructor(private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.chatBoxSendForm = this._formBuilder.group({
         chatbox: ['']
-    })
+    });
   }
 
-  onNgSubmit(event){
-    console.log(event)
+  onNgSubmit(event) {
+    if (this.isActive) {
+      alert('Enviado!');
+    } else {
+      alert('A mensagem não pôde ser enviada');
+    }
   }
 }

@@ -21,14 +21,14 @@ export class AuthenticationService {
   authenticate(cpf: string, password: string) {
     return this.http
       .post(
-        API_URL + '/token/', 
-        { cpf, password }, 
-        { observe: 'response'} 
+        API_URL + '/token/',
+        { cpf, password },
+        { observe: 'response'}
       )
       .pipe(tap(res => {
         const authToken = JSON.stringify(res.body.valueOf());
-        this.userService.setToken("accessToken", JSON.parse(authToken).access);
-        this.userService.setToken("refreshToken", JSON.parse(authToken).refresh);
+        this.userService.setToken('accessToken', JSON.parse(authToken).access);
+        this.userService.setToken('refreshToken', JSON.parse(authToken).refresh);
       }));
   }
 }

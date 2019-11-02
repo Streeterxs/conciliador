@@ -1,8 +1,8 @@
 <div class="chatContainer">
-    <app-chat-navbar class="navbarChatComponent"></app-chat-navbar>
+    <app-chat-navbar class="navbarChatComponent" [loggedUser]="loggedUser" (ativacaoEmitter)="chamarAtivacaoSala()"></app-chat-navbar>
     <div class="row contentContainer">
         <div class="my-2 col-12 col-sm-9">
-            <app-chat-mensagens [mensagens]="sala?.messages"></app-chat-mensagens>
+            <app-chat-mensagens [mensagens]="sala?.messages" [loggedUser]="loggedUser"></app-chat-mensagens>
         </div>
         <div class="my-2 col-sm-3 row p-0">
             <div class="pb-1 col-12 h-50">
@@ -13,5 +13,8 @@
             </div>
         </div>
     </div>
-    <app-chat-chat-box class="chatBox"></app-chat-chat-box>
+    <app-chat-chat-box class="chatBox" [isActive]="sala?.is_active"></app-chat-chat-box>
 </div>
+<app-message *ngIf="messageObj?.isToShow" [messageType]="messageObj?.messageType" [@messageAnimation]>
+    <strong>{{messageObj?.strongText}}</strong>{{messageObj?.messageText}}
+</app-message>

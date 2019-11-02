@@ -4,16 +4,16 @@
         <li>
             <h6>Moderadores</h6>
             <ul>
-                <li *ngFor="let moderador of moderadores"> 
-                    {{moderador?.nome}}
+                <li *ngFor="let moderador of moderadores" class="d-flex align-items-center justify-content-start m-1"> 
+                    <fa-icon [icon]="faUser" [ngClass]="{'mr-3': true, 'text-primary': moderador.is_connected}"></fa-icon> {{moderador?.nome}}
                 </li>
             </ul>
         </li>
         <li>
-            <h6>Comum</h6>
+            <h6>Usuários</h6>
             <ul>
-                <li *ngFor="let comum of usuariosComuns">
-                    {{comum?.nome}}
+                <li *ngFor="let comum of usuariosComuns" class="d-flex align-items-center justify-content-start m-1">
+                    <fa-icon [icon]="faUser" [ngClass]="{'mr-3': true, 'text-success': comum.is_connected}"></fa-icon> {{comum?.nome}}
                 </li>
             </ul>
         </li>

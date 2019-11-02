@@ -7,4 +7,5 @@ export interface Sala {
     integrantes?: User[];
     data?: Date;
     messages?: Mensagem[];
+    is_active?: boolean;
 }

@@ -20,8 +20,11 @@ export class DebounceButtonDirective implements OnInit, OnDestroy {
       this.debouncedClick.emit(event);
     })
   }
+
   ngOnDestroy(): void {
-    throw new Error("Method not implemented.");
+    if (this.debounceButtonSubscription) {
+      this.debounceButtonSubscription.unsubscribe();
+    }
   }
   @HostListener('click', ['$event'])
   clickEvent(event){

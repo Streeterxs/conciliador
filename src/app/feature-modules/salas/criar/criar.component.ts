@@ -50,12 +50,11 @@ export class CriarComponent implements OnInit {
     dateTimeToSubmit.setMinutes(this.salaCriacaoForm.controls.hora.value.minute);
     this.salaCriacaoForm.controls.data.setValue(dateTimeToSubmit);
     delete this.salaCriacaoForm.value.hora;
-    console.log(this.salaCriacaoForm.value);
     this._salasStoreService.addSala(this.salaCriacaoForm.value);
   }
 
   updateDropdownList(user: User) {
-    if (!user.is_admin && !user.is_moderador && user.is_active) {
+    if (!user.is_admin && !user.is_moderator && user.is_active) {
       this.drowpdown = this.drowpdown.concat({
         item_id: user.id,
         item_text: `${user.cpf} - ${user.nome}`

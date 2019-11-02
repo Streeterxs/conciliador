@@ -25,7 +25,6 @@ export class RequestInterceptor implements HttpInterceptor {
             const requestQueueServiceObj = this._injector.get(RequestQueueService);
 
             if (tokenService.hasToken("accessToken")) {
-                console.log("Interceptor entrou hehe");
                 const token = tokenService.getToken("accessToken");
                 req = req.clone({
                     setHeaders: {
@@ -33,9 +32,7 @@ export class RequestInterceptor implements HttpInterceptor {
                     }
                 });
             }
-            console.log(req);
             return next.handle(req).pipe(catchError(response => {
-                console.log(response);
                 if ((!!response.error) && (response.error.code === "token_not_valid")) {
                     if (!this._isTokenBeingRefreshed) {
                         this._isTokenBeingRefreshed = true;

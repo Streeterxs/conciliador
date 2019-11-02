@@ -56,12 +56,11 @@ export class SalaCriacaoFormComponent implements OnInit {
 
   onItemSelect() {
     this.usersSelected = this.returnSelectedItemsConvertedToUserObjArray();
-    console.log(this.usersSelected);
   }
 
   returnSelectedItemsConvertedToUserObjArray() {
     return this.selectedItems.map(item => {
-      return this.allUsers.find(user => user.id === item.item_id);
+      return item.item_id;
     });
   }
 

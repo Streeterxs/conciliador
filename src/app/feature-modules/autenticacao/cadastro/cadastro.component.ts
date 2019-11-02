@@ -30,16 +30,12 @@ export class CadastroComponent implements OnInit {
       }
     )
   }
-  formSubmited(){
-    console.log("entrou aqui");
-    
-    alert("Cadastro enviado!");
+  formSubmited() {
     this._userHttpService.registerUser(
-      this.cadastroForm.controls.cpf.value, 
-      this.cadastroForm.controls.nome.value, 
-      this.cadastroForm.controls.email.value, 
-      this.cadastroForm.controls.password.value).subscribe(user=>{
-        console.log(user);        
+      this.cadastroForm.controls.cpf.value,
+      this.cadastroForm.controls.nome.value,
+      this.cadastroForm.controls.email.value,
+      this.cadastroForm.controls.password.value).subscribe(user => {
       }, err => {
         const message: Message = {
           strongText: "",

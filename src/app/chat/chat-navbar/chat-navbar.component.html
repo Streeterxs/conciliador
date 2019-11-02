@@ -2,10 +2,13 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class='nav-item'>
-                <a class="nav-link navbarLink" routerLink="/home">Painel</a>
+                <a class="nav-link navbarLink" routerLink="/conciliador">Painel</a>
             </li>
-            <li class='nav-item'>
+            <li class='nav-item' *ngIf="loggedUser?.is_admin || loggedUser?.is_moderador">
                 <a class="nav-link navbarLink" routerLink="/conciliador/salas/lista">Salas</a>
+            </li>
+            <li class='nav-item' *ngIf="loggedUser?.is_admin || loggedUser?.is_moderador">
+                <a class="nav-link navbarLink" faDebounceButton (debouncedClick)="emitAtivacaoSala()" debounceTime="300">Ativar Sala</a>
             </li>
         </ul>         
     </div>

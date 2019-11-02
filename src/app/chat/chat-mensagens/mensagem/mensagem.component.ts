@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 import { Mensagem } from '../../../shared/interfaces/mensagem';
 import { UserService } from '../../../core/user/user.service';
@@ -9,24 +9,27 @@ import { User } from '../../../core/user/user';
   templateUrl: './mensagem.component.html',
   styleUrls: ['./mensagem.component.scss']
 })
-export class MensagemComponent implements OnInit {
+export class MensagemComponent implements OnInit, OnChanges {
   @Input() mensagem?: Mensagem;
+  @Input() loggedUser?;
 
   usuarioCriador: User;
-  currentUser: User;
 
   isTheOwner = false;
   constructor(private _userService: UserService) { }
 
   ngOnInit() {
-    this.currentUser = this._userService.getUser();
     this._userService.getUserById(this.mensagem.owner).subscribe(usuario => {
       this.usuarioCriador = usuario;
     });
-    console.log(this.usuarioCriador);
-    console.log(this.currentUser);
-    console.log(this.mensagem);
-    this.isTheOwner = this.currentUser.id === this.mensagem.owner? true : false;
+  }
+
+  ngOnChanges(changes: import('@angular/core').SimpleChanges): void {
+    if (changes.loggedUser) {
+      if (this.loggedUser) {
+        this.isTheOwner = this.loggedUser.id === this.mensagem.owner ? true : false;
+      }
+    }
   }
 
 }

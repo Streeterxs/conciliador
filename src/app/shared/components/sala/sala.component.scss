@@ -1,0 +1,17 @@
+.card{
+    margin: 0.5rem;
+    box-shadow: 1px 1px 5px rgba($color: #000000, $alpha: 0.4);
+    border: none;
+}
+
+.card-footer-wrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.shadowForButtons{
+    box-shadow: 2px 2px 4px rgba($color: #000000, $alpha: 0.6);
+}
