@@ -9,11 +9,11 @@ export class RoutingService {
   private activatedComponent$ = this.activatedComponent.asObservable();
   constructor() {}
 
-  updateCurrentComponent(newActivatedComponent){
-    this.activatedComponent.next(newActivatedComponent)
+  updateCurrentComponent(newActivatedComponent) {
+    this.activatedComponent.next(newActivatedComponent);
   }
 
-  get currentComponent(): Observable<string>{
+  get currentComponent(): Observable<string> {
     return this.activatedComponent$;
   }
 }

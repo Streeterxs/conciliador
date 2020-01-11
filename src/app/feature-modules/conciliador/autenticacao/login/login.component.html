@@ -1,0 +1,7 @@
+<div class="d-flex align-items-center justify-content-center min-height70vh">
+    <div class="w-50">
+        <h1 class="h1 mb-4">Login</h1>
+        <app-login-form [loginForm]="loginForm" (loginEmit)="loginSubmit()"></app-login-form>
+        <p>Não tem uma conta? <a routerLink="/conciliador/autenticacao/cadastro">Cadastrar</a></p>
+    </div>
+</div>

@@ -1,0 +1,134 @@
+<div class="p-3 painelWrapper d-flex justify-content-center">
+    <div class="w-100 py-3">
+        <div>
+            <h1 class="h2">Bem vindo!</h1>
+            <p class="lead">
+                Estes são os módulos que você tem acesso:
+            </p>
+        </div>
+        <div class="">
+            <div class="row m-0 p-4">
+                <div class="col-12 col-lg-6 p-2 d-flex align-items-center justify-content-center my-2">
+                    <div class="card width80">
+                        <div class="card-body">
+                            <h5 class="card-title">Cadastrar Novo Usuário</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Componente para auxiliar criação de novos usuários, além de encaminhar o novo usuário para uma sala já criada.</h6>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-footer-wrapper">
+                                <button [routerLink]="['/autenticacao', 'cadastro']" class="btn btn-primary shadowForButtons ml-auto d-block">Entrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 p-2 d-flex align-items-center justify-content-center my-2">
+                    <div class="card width80">
+                        <div class="card-body">
+                            <h5 class="card-title">Lista de Salas</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Componente para visualização das salas.</h6>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-footer-wrapper">
+                                <button [routerLink]="['/salas', 'lista']" class="btn btn-primary shadowForButtons ml-auto d-block">Entrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 p-2 d-flex align-items-center justify-content-center my-2">
+                    <div class="card width80">
+                        <div class="card-body">
+                            <h5 class="card-title">Registros de Conciliações</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Componente para visualização de registros de conciliações antigas.</h6>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-footer-wrapper">
+                                <button [routerLink]="['/autenticacao', 'cadastro']" class="btn btn-primary shadowForButtons ml-auto d-block">Entrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 p-2 d-flex align-items-center justify-content-center my-2">
+                    <div class="card width80">
+                        <div class="card-body">
+                            <h5 class="card-title">Criação de Salas</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Componente para criação de novas salas.</h6>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-footer-wrapper">
+                                <button [routerLink]="['/salas', 'criar']" class="btn btn-primary shadowForButtons ml-auto d-block">Entrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--
+        <div *ngIf="loggedUser?.is_admin || loggedUser?.is_moderator; else commonUser" class="mt-5 h-100">
+            <div class="row m-0 p-4 componentesDashboard h-100">
+                <div class="col-12 col-lg-3 p-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Cadastrar Novo Usuário</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Componente para auxiliar criação de novos usuários, além de encaminhar o novo usuário para uma sala já criada.</h6>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-footer-wrapper">
+                                <button [routerLink]="['/autenticacao', 'cadastro']" class="btn btn-primary shadowForButtons ml-auto d-block">Entrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 p-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Ver Salas</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Componente para visualização das salas.</h6>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-footer-wrapper">
+                                <button [routerLink]="['/salas', 'lista']" class="btn btn-primary shadowForButtons ml-auto d-block">Entrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 p-2">
+                    <div class="card ">
+                        <div class="card-body">
+                            <h5 class="card-title">Registros de Conciliações</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Componente para visualização de registros de conciliações antigas.</h6>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-footer-wrapper">
+                                <button [routerLink]="['/autenticacao', 'cadastro']" class="btn btn-primary shadowForButtons ml-auto d-block">Entrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 p-2">
+                    <div class="card ">
+                        <div class="card-body">
+                            <h5 class="card-title">Criar Sala</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Componente para criação de novas salas.</h6>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-footer-wrapper">
+                                <button [routerLink]="['/salas', 'criar']" class="btn btn-primary shadowForButtons ml-auto d-block">Entrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-template #commonUser>
+                <div class="mt-5 h-100">
+                    <div class="row py-3 h-100">
+                        <div *ngFor="let sala of _salasStoreService.salas$ | async" class="col-12 col-sm-6 col-md-4 p-0">
+                            <app-sala [sala]="sala"></app-sala>
+                        </div>
+                    </div>
+                </div>
+        </ng-template>
+    -->
+    </div>
+</div>

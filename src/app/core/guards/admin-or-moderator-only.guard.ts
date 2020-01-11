@@ -44,7 +44,7 @@ export class AdminOrModeratorOnlyGuard implements CanActivate  {
         isToShow: true
       };
       this._messageService.newMessage = message;
-      this._router.navigate(['conciliador', 'login']);
+      this._router.navigate(['conciliador', 'autenticacao', 'login']);
       return false;
     }
   }

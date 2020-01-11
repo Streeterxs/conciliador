@@ -17,7 +17,7 @@ import { TokenService } from './token/token.service';
   imports: [
     CommonModule
   ],
-  providers:[
+  providers: [
     AuthenticationService,
     UserService,
     UserHttpService,
@@ -30,7 +30,7 @@ import { TokenService } from './token/token.service';
       provide: HTTP_INTERCEPTORS,
       useClass: RequestInterceptor,
       multi: true
-    }    
+    }
   ]
 })
 export class CoreModule { }

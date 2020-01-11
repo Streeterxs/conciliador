@@ -1,0 +1,6 @@
+<div class="divChatBox">
+    <form class="row" [formGroup]="chatBoxSendForm" (ngSubmit)='onNgSubmit(chatBoxSendForm.value.chatbox)'>
+        <input type="text" formControlName="texto" class="col-11 form-control chatMessageInput" placeholder="Digite aqui...">
+        <button type="submit" class="col-1 btn btn-primary botaoSendMessage" [disabled]="!isActive">Enviar</button>        
+    </form>
+</div>

@@ -1,0 +1,58 @@
+<form class="formCriacao" [formGroup]="salaCriacaoForm" (ngSubmit)="formSubmit()">
+    <div class="form-group">
+        <label for="inputUsername3" class="col-form-label">Descrição</label>
+        <input type="text" class="form-control" formControlName="descricao" id="inputUsername3" placeholder="ex. Conciliação Banco do Brasil...">
+        <div *ngIf="salaCriacaoForm.controls.nome?.invalid && (salaCriacaoForm.controls.nome?.dirty || salaCriacaoForm.controls.nome?.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="salaCriacaoForm.controls.nome?.errors.required">
+                Nome é obrigatório.
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputusuarios3" class="col-form-label">Seleção de Usuários</label>
+        <ng-multiselect-dropdown
+        [placeholder]="'Selecionar Usuários'"
+        [data]="drowpdown"
+        [(ngModel)]="selectedItems"
+        [settings]="dropdownSettings"
+        (onSelect)="onItemSelect()"
+        (onDeSelect)="onDeSelect()"
+        formControlName="users"
+        >
+        </ng-multiselect-dropdown>
+        <div *ngIf="selectedItems.length > 0">
+            **Usuário Selecionados: 
+            <div *ngFor="let item of selectedItems">
+                {{item?.item_text}}
+            </div>
+        </div>
+    </div>
+    <div class="form-group row mt-5">
+        <label for="inputdata3" class="col-sm-3 col-form-label">Data</label>
+        <div class="col-sm-9">
+            <div class="input-group">
+                <input type="text" ngbDatepicker (dateSelect)="testModel($event)" [(ngModel)]="model" #d="ngbDatepicker" class="form-control" formControlName="data" id="inputdata3" placeholder="data">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                        <fa-icon [icon]="faCalendarAlt"></fa-icon>
+                    </button>
+                </div>
+            </div>
+            <ngb-timepicker formControlName="hora" [(ngModel)]="time" meridian="true"></ngb-timepicker>
+            <div *ngIf="salaCriacaoForm.controls.data?.invalid && (salaCriacaoForm.controls.data?.dirty || salaCriacaoForm.controls.data?.touched)"
+                class="alert alert-danger">
+
+                <div *ngIf="salaCriacaoForm.controls.data?.errors.required">
+                    data é obrigatório.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-12 d-flex align-items-center justify-content-end">
+            <button type="submit" class="btn btn-primary width100 mt-2" [disabled]="!salaCriacaoForm.valid">Criar Sala</button>
+        </div>
+    </div>
+</form>

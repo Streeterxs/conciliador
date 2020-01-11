@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand navbarLink" routerLink="/conciliador">Firme Acordos</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li *ngIf="userIsLogged" [ngClass]="active==='Painel'? 'nav-item active': 'nav-item'">
+                    <a class="nav-link navbarLink" routerLink="/conciliador/painel">Painel</a>
+                </li>
+                <li *ngIf="userIsLogged && (loggedUser?.is_admin || loggedUser?.is_moderador)" [ngClass]="active==='Salas'? 'nav-item active': 'nav-item'">
+                    <a class="nav-link navbarLink" routerLink="/conciliador/salas/lista">Salas</a>
+                </li>
+            </ul>
+            <li *ngIf="userIsLogged; then loggedTemplate else loginTemplate"></li>
+            <ng-template #loggedTemplate>
+                <div>Bem vindo, {{loggedUser.nome}}. <a (click)="logoutEmit()" class="m-auto">sair</a></div>
+            </ng-template>
+            <ng-template #loginTemplate>
+                <a class="navbarLink" routerLink="/conciliador/autenticacao/login">Login</a>
+            </ng-template>            
+        </div>
+    </div>
+</nav>

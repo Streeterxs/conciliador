@@ -6,8 +6,10 @@
     </div>
     <div class="card-footer">
         <div class="card-footer-wrapper">
-            <button class="btn btn-primary mx-3 shadowForButtons" [disabled]="(!loggedUser?.is_admin && !loggedUser?.is_moderator) && !sala?.is_active">Integrantes</button>
-            <button [routerLink]="['/chat', sala?.id]" [disabled]="(!loggedUser?.is_admin && !loggedUser?.is_moderator) && !sala?.is_active" class="btn btn-success shadowForButtons">Entrar</button>
+            <button class="btn btn-secondary mx-3 shadowForButtons">Integrantes</button>
+            <button [routerLink]="['/chat', sala?.id]" class="btn btn-primary shadowForButtons">Entrar</button>
+            <!-- <button class="btn btn-secondary mx-3 shadowForButtons" [disabled]="(!loggedUser?.is_admin && !loggedUser?.is_moderator) && !sala?.is_active">Integrantes</button>
+            <button [routerLink]="['/chat', sala?.id]" [disabled]="(!loggedUser?.is_admin && !loggedUser?.is_moderator) && !sala?.is_active" class="btn btn-primary shadowForButtons">Entrar</button> -->
         </div>
     </div>
 </div>
