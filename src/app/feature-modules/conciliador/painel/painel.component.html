@@ -64,7 +64,7 @@
         </div>
 
         <!--
-        <div *ngIf="loggedUser?.is_admin || loggedUser?.is_moderator; else commonUser" class="mt-5 h-100">
+        <div *ngIf="userIsAdminOrModerator; else commonUser" class="mt-5 h-100">
             <div class="row m-0 p-4 componentesDashboard h-100">
                 <div class="col-12 col-lg-3 p-2">
                     <div class="card">

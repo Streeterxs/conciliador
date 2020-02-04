@@ -1,6 +1,7 @@
 import { User } from '../../core/user/user';
 
 export interface Integrante {
+     id: number;
      confirmado?: boolean;
-     integrante?: User;
+     user?: User;
 }

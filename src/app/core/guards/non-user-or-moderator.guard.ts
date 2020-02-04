@@ -5,6 +5,7 @@ import { UserService } from '../user/user.service';
 import { MessageService } from '../message/message.service';
 import { Message } from '../message/message';
 import { AlertType } from '../../shared/enum/alert-type.enum';
+import { Role } from '../user/role.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,9 @@ export class NonUserOrModeratorGuard implements CanActivate {
   canActivate() {
     if (!this._userService.isLogged() ||
     ((this._userService.getUser() !== null) ?
-    (this._userService.isLogged() && (this._userService.getUser().is_admin || this._userService.getUser().is_moderator)
+    (this._userService.isLogged() &&
+    (this._userService.getUser().roles.includes(Role[Role.ROLE_ADMIN]) ||
+    this._userService.getUser().roles.includes(Role[Role.ROLE_MODERATOR]))
     && this._userService.getUser() !== null) : false)) {
       return true;
     } else {

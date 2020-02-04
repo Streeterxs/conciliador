@@ -20,7 +20,7 @@ export class MensagemComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     console.log(this.mensagem);
-    this._userService.getUserById(this.mensagem.owner).subscribe(usuario => {
+    this._userService.getUserById(this.mensagem.criador.id).subscribe(usuario => {
       this.usuarioCriador = usuario;
     });
   }
@@ -28,7 +28,7 @@ export class MensagemComponent implements OnInit, OnChanges {
   ngOnChanges(changes: import('@angular/core').SimpleChanges): void {
     if (changes.loggedUser) {
       if (this.loggedUser) {
-        this.isTheOwner = this.loggedUser.id === this.mensagem.owner ? true : false;
+        this.isTheOwner = this.loggedUser.id === this.mensagem.criador.id ? true : false;
       }
     }
   }

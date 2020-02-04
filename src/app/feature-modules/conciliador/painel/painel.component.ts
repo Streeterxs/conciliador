@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { User } from '../../../core/user/user';
 import { UserService } from '../../../core/user/user.service';
 import { SalasStoreService } from '../../../core/salas/salas-store.service';
+import { Role } from 'src/app/core/user/role.enum';
 
 @Component({
   selector: 'app-painel',
@@ -14,6 +15,7 @@ import { SalasStoreService } from '../../../core/salas/salas-store.service';
 export class PainelComponent implements OnInit, OnDestroy {
   loggedUser: User;
 
+  userIsAdminOrModerator: boolean;
   userSubscription: Subscription;
 
   constructor(
@@ -26,11 +28,12 @@ export class PainelComponent implements OnInit, OnDestroy {
       console.log(user);
       if (user) {
         this.loggedUser = user;
-        if (!this.loggedUser.is_admin || !this.loggedUser.is_moderator) {
-          this._salasStoreService.receberTodasAsSalasDeUmUsuario(this.loggedUser);
+        if (!this.loggedUser.roles.includes(Role[Role.ROLE_ADMIN]) || !this.loggedUser.roles.includes(Role[Role.ROLE_MODERATOR])) {
+          this._salasStoreService.getAllSalasToList();
         }
       }
     });
+    this.userIsAdminOrModerator = this._userService.userIsAdmin() || this._userService.userIsModerator();
   }
 
   ngOnDestroy(): void {

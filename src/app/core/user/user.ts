@@ -1,10 +1,8 @@
 export interface User {
-    id?: number;
-    cpf?: string;
-    nome?: string;
-    email?: string;
-    is_admin?: boolean;
-    is_active?: boolean;
-    is_moderator?: boolean;
-    is_connected?: boolean;
+    cpf: string;
+    nome: string;
+    email: string;
+    id: number;
+    roles: string[];
+    ativo: boolean;
 }

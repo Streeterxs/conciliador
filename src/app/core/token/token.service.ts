@@ -1,48 +1,55 @@
 import { Injectable } from '@angular/core';
 
+import * as jtw_decode from 'jwt-decode';
 import { BehaviorSubject } from 'rxjs';
+
+import { Token } from './token';
+import { TokenDecoded } from './token-decoded';
 
 @Injectable({ providedIn: 'root'})
 export class TokenService {
 
-  constructor() {
-      if (this.hasToken('accessToken') && this.hasToken('refreshToken')) {
-          this._accessToken.next(
-                  this.getToken('accessToken')
-          );
-      } else {
-          this._accessToken.next(
-              null
-          );
-      }
+    private _token: BehaviorSubject<Token> = new BehaviorSubject(null);
+    token$ = this._token.asObservable();
+
+    constructor() {
+        if (this.hasToken()) {
+            this._token.next(
+                    this.getToken()
+            );
+        } else {
+            this._token.next(
+                null
+            );
+        }
+    }
+
+
+  hasToken() {
+      console.log('[Token Service] usuário está logado? ', !!this.getToken());
+      return !!this.getToken();
   }
 
-  private _accessToken: BehaviorSubject<string> = new BehaviorSubject('');
-
-  accessToken$ = this._accessToken.asObservable();
-
-  hasToken(key) {
-      console.log('[Token Service] usuário está logado? ', !!this.getToken(key));
-      return !!this.getToken(key);
+  setToken(token: Token) {
+        window.localStorage.setItem('token', JSON.stringify(token));
+        this._token.next(token);
   }
 
-  setToken(key, token) {
-      window.localStorage.setItem(key, token);
-      if (key === 'accessToken') {
-          console.log('entrando set token');
-          this._accessToken.next(token);
-      }
+  getToken(): Token {
+      return JSON.parse(window.localStorage.getItem('token'));
   }
 
-  getToken(key) {
-      return window.localStorage.getItem(key);
+  removeToken() {
+      window.localStorage.removeItem('token');
+      this._token.next(null);
   }
 
-  removeToken(key) {
-      window.localStorage.removeItem(key);
+  decodeToken(accessToken: string): TokenDecoded {
+      return jtw_decode(accessToken);
   }
 
-  nullifyTokensObject() {
-      this._accessToken.next(null);
+  tokenIsExpired() {
+      const time = new Date().getTime();
+      return time > this._token.value.expiration * 1000;
   }
 }

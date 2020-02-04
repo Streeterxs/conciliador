@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   ApiUrl: 'https://firmeacordos-teste.herokuapp.com/api',
-  ApiLocal: 'http://192.168.1.3/api',
+  ApiLocal: 'http://192.168.1.3:8080/api',
   wsApiLocal: 'ws://192.168.1.3'
 };
 

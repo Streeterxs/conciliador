@@ -39,8 +39,7 @@ export class CadastroComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       passwordRepeat: ['', [Validators.required, Validators.minLength(8)]],
-      is_moderator: false,
-      is_admin: false
+      role: null
     }, {
         validator: passwordRepeatValidator
       }
@@ -50,12 +49,43 @@ export class CadastroComponent implements OnInit {
   getLoggedUser() {
     this.loggedUser = this._userService.getUser();
   }
+
   formSubmited() {
+    if (this._userService.isLogged() && (this._userService.userIsModerator || this._userService.userIsAdmin)) {
+      this.criarUsuarioComRole();
+    } else if (!this._userService.isLogged()) {
+      this.criarUsuarioSemRole();
+    } else {
+      this._router.navigate(['conciliador']);
+    }
+  }
+
+  criarUsuarioSemRole() {
+    this._userHttpService.createUserSemRole(this.cadastroForm.value).subscribe(
+      () => {},
+      err => {
+        const message: Message = {
+          strongText: '',
+          messageText: 'Erro na hora do cadastro',
+          messageType: AlertType.DANGER,
+          isToShow: true
+        };
+        this._messageService.newMessage = message;
+      }, () => {
+        const message: Message = {
+          strongText: '',
+          messageText: 'Cadastro feito com sucesso!',
+          messageType: AlertType.SUCCESS,
+          isToShow: true
+        };
+        this._messageService.newMessage = message;
+        this._router.navigate(['conciliador']);
+      });
+  }
+
+  criarUsuarioComRole() {
     this._userHttpService.registerUser(
-      this.cadastroForm.controls.cpf.value,
-      this.cadastroForm.controls.nome.value,
-      this.cadastroForm.controls.email.value,
-      this.cadastroForm.controls.password.value).subscribe(user => {
+      this.cadastroForm.value).subscribe(user => {
       }, err => {
         const message: Message = {
           strongText: '',

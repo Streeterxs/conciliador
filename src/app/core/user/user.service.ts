@@ -7,6 +7,8 @@ import * as jtw_decode from 'jwt-decode';
 import { TokenService } from '../token/token.service';
 import { UserHttpService } from './user-http.service';
 import { User } from './user';
+import { Role } from './role.enum';
+import { Token } from '../token/token';
 
 @Injectable({ providedIn: 'root'})
 export class UserService {
@@ -19,19 +21,18 @@ export class UserService {
     readonly userSubject$ = this.userSubject.asObservable();
 
     constructor(private tokenService: TokenService, private _userHttpService: UserHttpService) {
-        this.tokenService.accessToken$.subscribe(accessToken => {
-            if (this.tokenService.hasToken('accessToken')) {
-                this.decodeAndNotify(accessToken);
+        this.tokenService.token$.subscribe(token => {
+            if (this.tokenService.hasToken()) {
+                this.decodeAndNotify(token.accessToken);
             }
-            this.userIsLoggedSubject.next(!!accessToken);
+            this.userIsLoggedSubject.next(!!token);
         });
     }
 
-    setToken(key, token: string) {
-        this.tokenService.setToken(key, token);
-        if (key === 'accessToken') {
-            this.decodeAndNotify(token);
-        }
+    setToken(accessToken: string) {
+        const tokenDecoded = this.tokenService.decodeToken(accessToken);
+        this.tokenService.setToken({accessToken, expiration: tokenDecoded.exp, creation: tokenDecoded.iat});
+        this.decodeAndNotify(accessToken);
     }
 
     getUser(): User {
@@ -43,30 +44,34 @@ export class UserService {
     }
 
     private decodeAndNotify(accessToken) {
-        const tokenDecodedInDecodeAndNotify = jtw_decode(accessToken);
-        this._userHttpService.getUser(tokenDecodedInDecodeAndNotify.user_id).subscribe(user => {
-            this.userSubject.next(user);
-            this.userName = user.nome;
-        });
+        const tokenDecodedInDecodeAndNotify = this.tokenService.decodeToken(accessToken);
+        const newUser: User = {
+            cpf: tokenDecodedInDecodeAndNotify.sub,
+            nome: tokenDecodedInDecodeAndNotify.nome,
+            email: tokenDecodedInDecodeAndNotify.email,
+            id: tokenDecodedInDecodeAndNotify.id,
+            roles: tokenDecodedInDecodeAndNotify.role,
+            ativo: tokenDecodedInDecodeAndNotify.ativo
+        };
+        console.log(newUser);
+        this.userSubject.next(newUser);
     }
 
     logout(callback?) {
-        this.tokenService.removeToken('refreshToken');
-        this.tokenService.removeToken('accessToken');
-        this.tokenService.nullifyTokensObject();
+        this.tokenService.removeToken();
         this.userSubject.next(null);
         callback();
     }
 
     isLogged() {
-        return this.tokenService.hasToken('accessToken');
+        return this.tokenService.hasToken();
     }
 
-    getUserName() {
-        return this.userName;
+    userIsModerator() {
+        return this.userSubject.value.roles.includes(Role[Role.ROLE_MODERATOR]);
     }
 
-    returnAllRegisteredUsers(): Observable<User[]> {
-        return this._userHttpService.getAllUser();
+    userIsAdmin() {
+        return this.userSubject.value.roles.includes(Role[Role.ROLE_ADMIN]);
     }
 }

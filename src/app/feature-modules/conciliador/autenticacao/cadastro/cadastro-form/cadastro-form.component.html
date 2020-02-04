@@ -6,7 +6,7 @@
             [ngClass]="{'form-control': true, 'is-invalid': cadastroForm.controls.nome?.invalid && (cadastroForm.controls.nome?.dirty || cadastroForm.controls.nome?.touched), 'is-valid': cadastroForm.controls.nome?.valid && (cadastroForm.controls.nome?.dirty)}"
             formControlName="nome"
             id="inputUsername3"
-            placeholder="nome">
+            placeholder="Ex: Leandro Soares Neto...">
             <div *ngIf="cadastroForm.controls.nome?.invalid && (cadastroForm.controls.nome?.dirty || cadastroForm.controls.nome?.touched)">
                 <small 
                 *ngIf="cadastroForm.controls.nome?.errors?.required"
@@ -22,7 +22,7 @@
             [ngClass]="{'form-control': true, 'is-invalid': cadastroForm.controls.cpf?.invalid && (cadastroForm.controls.cpf?.dirty || cadastroForm.controls.cpf?.touched), 'is-valid': cadastroForm.controls.cpf?.valid && (cadastroForm.controls.cpf?.dirty)}" 
             formControlName="cpf"
             id="inputCpf3"
-            placeholder="cpf">
+            placeholder="Ex: 084.554.082-22...">
             <div
             *ngIf="cadastroForm.controls.cpf?.invalid && (cadastroForm.controls.cpf?.dirty || cadastroForm.controls.cpf?.touched)"
             class="d-flex flex-column">
@@ -40,7 +40,7 @@
     </div>
     <div class="form-group">
         <label for="inputEmail3" class="col-form-label">Email</label>
-        <input type="email" class="form-control" [ngClass]="{'form-control': true, 'is-invalid': cadastroForm.controls.email?.invalid && (cadastroForm.controls.email?.dirty || cadastroForm.controls.email?.touched), 'is-valid': cadastroForm.controls.email?.valid && (cadastroForm.controls.email?.dirty)}" formControlName="email" id="inputEmail3" placeholder="Email">
+        <input type="email" class="form-control" [ngClass]="{'form-control': true, 'is-invalid': cadastroForm.controls.email?.invalid && (cadastroForm.controls.email?.dirty || cadastroForm.controls.email?.touched), 'is-valid': cadastroForm.controls.email?.valid && (cadastroForm.controls.email?.dirty)}" formControlName="email" id="inputEmail3" placeholder="Ex: leandro.neto23@gmail.com...">
         <div
         *ngIf="cadastroForm.controls.email?.invalid && (cadastroForm.controls.email?.dirty || cadastroForm.controls.email?.touched)"
             class="d-flex flex-column">
@@ -105,14 +105,14 @@
                 <label for="divPermissoes">Permissões</label>
                 <div id="divPermissoes py-2">
                     <div class="form-check my-2">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" formControlName="is_moderator">
-                        <label class="form-check-label" for="defaultCheck1">
+                        <input class="form-check-input" type="checkbox" value="ROLE_MODERATOR" id="checkRoleModerator" (change)="concatToRoleList($event.target.value)">
+                        <label class="form-check-label" for="checkRoleModerator">
                             Moderador
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" formControlName="is_admin">
-                        <label class="form-check-label" for="defaultCheck1">
+                        <input class="form-check-input" type="checkbox" value="ROLE_ADMIN" id="checkRoleAdmin" (change)="concatToRoleList($event.target.value)">
+                        <label class="form-check-label" for="checkRoleAdmin">
                             Administrador
                         </label>
                     </div>

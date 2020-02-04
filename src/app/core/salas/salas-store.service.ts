@@ -39,15 +39,6 @@ export class SalasStoreService {
     return this._salasHttpService.ativarSala(sala.id);
   }
 
-  receberTodasAsSalasDeUmUsuario(user: User) {
-    this._salasHttpService.receberTodasAsSalasDeUmIntegrante(user.id).subscribe(salas => {
-      if (salas) {
-        console.log(salas);
-        this.salas.next(salas);
-      }
-    });
-  }
-
   conectarWebsocketDaSala(idSala: number) {
   }
 

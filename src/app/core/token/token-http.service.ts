@@ -21,24 +21,24 @@ export class TokenHttpService {
   ) { }
 
   refreshToken(): Observable<any>{
-    const refreshToken = this.tokenService.getToken("refreshToken");
+    const refreshToken = this.tokenService.getToken();
     return this.http.post(
       API_URL + '/token/refresh/',
       { refresh: refreshToken },
       { observe: 'response' }
     ).pipe(share(), tap(res => {
       const authToken = JSON.stringify(res.body.valueOf());
-      this.tokenService.setToken("accessToken", JSON.parse(authToken).access);
-      this.tokenService.setToken("refreshToken", JSON.parse(authToken).refresh);
-    }))
+      this.tokenService.setToken(JSON.parse(authToken).access);
+      this.tokenService.setToken(JSON.parse(authToken).refresh);
+    }));
   }
 
   tokenVerify(){
-    const accessToken = this.tokenService.getToken("accessToken");
+    const accessToken = this.tokenService.getToken();
     return this.http.post(
       API_URL + '/token/verify/',
       { token: accessToken },
       { observe: 'response'}
-    )
+    );
   }
 }

@@ -16,6 +16,7 @@ import { Message } from '../../core/message/message';
 import { Sala } from '../../shared/interfaces/sala';
 import { AlertType } from '../../shared/enum/alert-type.enum';
 import { Mensagem } from '../../shared/interfaces/mensagem';
+import { Role } from 'src/app/core/user/role.enum';
 
 
 @Component({
@@ -73,7 +74,7 @@ export class ChatComponent implements OnInit, OnDestroy {
       if (message.command === "fetchMessages") {
         this._salasWebsocketService.buscarMensagens(this.websocketSubject, this.sala.id);
       } else if (message.command === 'new_message') {
-        this.sala.messages = this.sala.messages.concat(message.message);
+        this.sala.mensagens = this.sala.mensagens.concat(message.message);
       }
       console.log('[Chat Component] mensagem do websocket: ', message);
     }, err => {
@@ -122,7 +123,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   checaSeSalaEstaAtivaERedirecionaCasoNao(sala: Sala) {
     if (sala.is_active) {
       return;
-    } else if (!this.loggedUser.is_admin || !this.loggedUser.is_moderator) {
+    } else if (!this.loggedUser.roles.includes(Role[Role.ROLE_ADMIN]) || !this.loggedUser.roles.includes(Role[Role.ROLE_MODERATOR])) {
       const message: Message = {
         strongText: 'Aviso! ',
         messageText: 'Esta sala ainda não está ativa.',

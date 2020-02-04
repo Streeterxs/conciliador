@@ -1,11 +1,11 @@
 import { Mensagem } from './mensagem';
-import { User } from '../../core/user/user';
+import { Integrante } from './integrante';
 
 export interface Sala {
-    id?: number;
-    descricao?: string;
-    integrantes?: User[];
-    data?: Date;
-    messages?: Mensagem[];
-    is_active?: boolean;
+    data: Date,
+    descricao: string;
+    id: number;
+    integrantes: Integrante[];
+    is_active: boolean;
+    mensagens: Mensagem[];
 }

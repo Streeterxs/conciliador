@@ -1,6 +1,8 @@
+import { User } from '../../core/user/user';
+
 export interface Mensagem {
-     id?: number;
-     owner?: number;
-     date?: Date;
-     texto?: string;
+     criador: User;
+     data: Date;
+     id: number;
+     mensagem: string;
 }

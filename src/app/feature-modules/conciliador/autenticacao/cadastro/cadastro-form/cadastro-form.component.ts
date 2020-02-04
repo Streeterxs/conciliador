@@ -12,14 +12,22 @@ export class CadastroFormComponent implements OnInit {
   @Input() cadastroForm?: FormGroup;
   @Input() loggedUser?: User;
 
+  roleList = ['ROLE_USER'];
+
   @Output() emitForm = new EventEmitter();
+  @Output() concatRoleValue: EventEmitter<string[]> = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
   }
 
   formSubmit() {
-    this.emitForm.emit("");
+    this.emitForm.emit('');
+  }
+
+  concatToRoleList(event) {
+    this.roleList = this.roleList.includes(event) ? this.roleList.filter(role => role !== event) : this.roleList.concat(event);
+    this.concatRoleValue.emit(this.roleList);
   }
 
 }
