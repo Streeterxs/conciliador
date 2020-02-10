@@ -45,7 +45,7 @@ export class SalaCriacaoFormComponent implements OnInit {
   }
 
   formSubmit() {
-    this.salaCriacaoForm.controls.users.setValue(this.usersSelected);
+    this.salaCriacaoForm.controls.userIdList.setValue(this.usersSelected);
     this.selectedItems = [];
     this.emitFormSubmit.emit();
   }

@@ -29,10 +29,23 @@ export class CadastroComponent implements OnInit {
     private _salas: SalasStoreService) { }
 
   ngOnInit() {
-    this.cadastroForm = this.generateCadastroForm();
+    this.cadastroForm = this._userService.isUserStaff() ? this.generateCadastroFormForStaff() : this.generateCadastroForm();
   }
 
   generateCadastroForm() {
+    return this._formBuilder.group({
+      nome: ['', [Validators.required]],
+      cpf: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      passwordRepeat: ['', [Validators.required, Validators.minLength(8)]]
+    }, {
+        validator: passwordRepeatValidator
+      }
+    );
+  }
+
+  generateCadastroFormForStaff() {
     return this._formBuilder.group({
       nome: ['', [Validators.required]],
       cpf: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],

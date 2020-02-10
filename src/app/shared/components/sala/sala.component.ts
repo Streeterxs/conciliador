@@ -13,6 +13,7 @@ import { User } from '../../../core/user/user';
 })
 export class SalaComponent implements OnInit, OnDestroy {
   @Input() sala: Sala;
+  @Input() firstCard: boolean = false;
 
   loggedUser: User;
 

@@ -21,7 +21,7 @@ export class UserHttpService {
   }
 
   getAllUser(): Observable<User[]> {
-    return this.http.get<User[]>(this.userUrl + `/users/`);
+    return this.http.get<User[]>(this.userUrl + `/get-users/`);
   }
 
   registerUser(newUser): Observable<User> {

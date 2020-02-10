@@ -16,6 +16,7 @@ export class PainelComponent implements OnInit, OnDestroy {
   loggedUser: User;
 
   userIsAdminOrModerator: boolean;
+  isUserActive: boolean;
   userSubscription: Subscription;
 
   constructor(
@@ -34,6 +35,7 @@ export class PainelComponent implements OnInit, OnDestroy {
       }
     });
     this.userIsAdminOrModerator = this._userService.userIsAdmin() || this._userService.userIsModerator();
+    this.isUserActive = this._userService.isUserActive();
   }
 
   ngOnDestroy(): void {

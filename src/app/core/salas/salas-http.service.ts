@@ -11,7 +11,7 @@ const API_URL = environment.ApiLocal;
   providedIn: 'root'
 })
 export class SalasHttpService {
-  salasUrl = `${API_URL}/api/salas`;
+  salasUrl = `${API_URL}/salas`;
 
   constructor(private http: HttpClient) { }
 
@@ -20,7 +20,7 @@ export class SalasHttpService {
   }
 
   getSalaById(id: number): Observable<Sala> {
-    return this.http.get<Sala>(this.salasUrl + `/get-salas/${id}/`);
+    return this.http.get<Sala>(this.salasUrl + `/get-sala/${id}/`);
   }
 
   criarSala(newSala: Sala): Observable<Sala> {

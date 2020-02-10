@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { User } from '../../../../../core/user/user';
+import { UserService } from 'src/app/core/user/user.service';
 
 @Component({
   selector: 'app-cadastro-form',
@@ -13,12 +14,14 @@ export class CadastroFormComponent implements OnInit {
   @Input() loggedUser?: User;
 
   roleList = ['ROLE_USER'];
+  isUserAdmin: boolean;
 
   @Output() emitForm = new EventEmitter();
   @Output() concatRoleValue: EventEmitter<string[]> = new EventEmitter();
-  constructor() { }
+  constructor(private _userService: UserService) { }
 
   ngOnInit() {
+    this.isUserAdmin = this._userService.userIsAdmin();
   }
 
   formSubmit() {

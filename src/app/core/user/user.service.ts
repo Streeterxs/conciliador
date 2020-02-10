@@ -68,10 +68,22 @@ export class UserService {
     }
 
     userIsModerator() {
-        return this.userSubject.value.roles.includes(Role[Role.ROLE_MODERATOR]);
+        return this.userSubject.value ? this.userSubject.value.roles.includes(Role[Role.ROLE_MODERATOR]) : false;
     }
 
     userIsAdmin() {
-        return this.userSubject.value.roles.includes(Role[Role.ROLE_ADMIN]);
+        return this.userSubject.value ? this.userSubject.value.roles.includes(Role[Role.ROLE_ADMIN]) : false;
+    }
+
+    isUserStaff() {
+        return (this.userIsAdmin() || this.userIsModerator());
+    }
+
+    isUserActive() {
+        return this.userSubject.value ? this.userSubject.value.ativo : false;
+    }
+
+    getAllUsers() {
+        return this._userHttpService.getAllUser();
     }
 }

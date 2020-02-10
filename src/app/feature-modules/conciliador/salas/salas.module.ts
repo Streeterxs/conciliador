@@ -13,6 +13,8 @@ import { CriarComponent } from './criar/criar.component';
 import { SalasComponent } from './salas.component';
 import { SalaCriacaoFormComponent } from './criar/sala-criacao-form/sala-criacao-form.component';
 import { SalaModule } from 'src/app/shared/components/sala/sala.module';
+import { AsideFilterModule } from './lista/aside-filter/aside-filter.module';
+import { DescFilterModule } from './lista/desc-filter/desc-filter.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,10 @@ import { SalaModule } from 'src/app/shared/components/sala/sala.module';
     NgbTypeaheadModule,
     FontAwesomeModule,
     NgMultiSelectDropDownModule,
-    SalaModule
+    SalaModule,
+    AsideFilterModule,
+    FontAwesomeModule,
+    DescFilterModule
   ]
 })
 export class SalasModule { }

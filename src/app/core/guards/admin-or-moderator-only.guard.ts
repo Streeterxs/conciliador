@@ -20,23 +20,18 @@ export class AdminOrModeratorOnlyGuard implements CanActivate  {
 
   canActivate() {
     if (this._userService.isLogged()) {
-      if (this._userService.getUser() !== null) {
-        if (this._userService.getUser().roles.includes(Role[Role.ROLE_MODERATOR]) ||
-        this._userService.getUser().roles.includes(Role[Role.ROLE_ADMIN])) {
-          return true;
-        } else {
-          const message: Message = {
-            strongText: '',
-            messageText: 'Você não tem permissão para entrar nesta página.',
-            messageType: AlertType.WARNING,
-            isToShow: true
-          };
-          this._messageService.newMessage = message;
-          this._router.navigate(['conciliador']);
-          return false;
-        }
+      if (this._userService.isUserStaff()) {
+        return true;
       } else {
+        const message: Message = {
+          strongText: '',
+          messageText: 'Você não tem permissão para entrar nesta página.',
+          messageType: AlertType.WARNING,
+          isToShow: true
+        };
+        this._messageService.newMessage = message;
         this._router.navigate(['conciliador']);
+        return false;
       }
     } else {
       const message: Message = {

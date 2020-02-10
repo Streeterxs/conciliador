@@ -1,8 +1,17 @@
-<div class="card">
+<div class="card" [ngClass]="{'firstCard': firstCard, 'restOfCards': !firstCard}">
     <div class="card-body">
-        <h5 class="card-title">Sala {{sala?.id}}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{sala?.descricao}}</h6>
-        <p class="card-text">0/{{sala?.integrantes.length}}</p>
+        <div class="d-flex">
+            <h5 class="card-title w-100">Sala {{sala?.id}}</h5>
+            <div class="d-block ml-auto">
+                <div class="d-flex">
+                    <span class="d-flex align-items-center justify-content-center">
+                        <span class="onlineBall bg-success mx-2"></span>
+                        0/{{sala?.integrantes.length}}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <h6 class="card-subtitle my-1">{{sala?.descricao}}</h6>
     </div>
     <div class="card-footer">
         <div class="card-footer-wrapper">

@@ -2,7 +2,7 @@ import { Mensagem } from './mensagem';
 import { Integrante } from './integrante';
 
 export interface Sala {
-    data: Date,
+    data: Date;
     descricao: string;
     id: number;
     integrantes: Integrante[];

@@ -30,15 +30,15 @@ export class CriarComponent implements OnInit {
       descricao: ['', Validators.required],
       data: [Date, Validators.required],
       hora: ['', Validators.required],
-      users: ''
+      userIdList: ''
     });
-    /* this._userService.returnAllRegisteredUsers().subscribe(allUsers => {
+    this._userService.getAllUsers().subscribe(allUsers => {
       this.allUsers = allUsers;
     }, err => {}, () => {
       this.allUsers.forEach(user => {
         this.updateDropdownList(user);
       });
-    }); */
+    });
   }
 
   formSubmit() {
@@ -56,7 +56,8 @@ export class CriarComponent implements OnInit {
   }
 
   updateDropdownList(user: User) {
-    if (!user.roles.includes(Role[Role.ROLE_ADMIN]) && !user.roles.includes(Role[Role.ROLE_MODERATOR]) /* && user. */) { // TODO esperando dto user active
+    if (!user.roles.includes(Role[Role.ROLE_ADMIN]) &&
+    !user.roles.includes(Role[Role.ROLE_MODERATOR]) /* && user. */) { // TODO esperando dto user active
       this.drowpdown = this.drowpdown.concat({
         item_id: user.id,
         item_text: `${user.cpf} - ${user.nome}`

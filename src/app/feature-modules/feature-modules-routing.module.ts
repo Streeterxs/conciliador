@@ -5,6 +5,7 @@ import { AuthGuard } from '../core/guards/auth.guard';
 import { AdminOrModeratorOnlyGuard } from '../core/guards/admin-or-moderator-only.guard';
 import { FeatureModulesComponent } from './feature-modules.component';
 import { NonUserOrModeratorGuard } from '../core/guards/non-user-or-moderator.guard';
+import { UserActiveGuard } from '../core/guards/user-active.guard';
 
 const routes: Routes = [
   {path: '', component: FeatureModulesComponent, children: [
@@ -14,12 +15,12 @@ const routes: Routes = [
     },
     {
       path: 'conciliador',
-      loadChildren: './conciliador/conciliador.module#ConciliadorModule',
-      //canActivate: [AdminOrModeratorOnlyGuard]
+      loadChildren: './conciliador/conciliador.module#ConciliadorModule'
     },
     {
       path: 'chat/:id',
-      loadChildren: './chat/chat.module#ChatModule'
+      loadChildren: './chat/chat.module#ChatModule',
+      canActivate: [UserActiveGuard]
     }
   ]},
   {path: '**', redirectTo: ''}
