@@ -1,18 +1,34 @@
 <div class="btn-group-vertical w-100">
-    <button type="button" class="btn btn-light d-flex">
+    <button type="button" class="btn btn-light d-flex" faDebounceButton debounceTime="300" (debouncedClick)="clickTodas.emit()">
+        <span class="w-100 text-left">
+            Todas
+        </span>
+        <span class="text-right w-100">
+            <span class="badge badge-secondary">{{totalSalas | async}}</span>
+        </span>
+    </button>
+    <button type="button" class="btn btn-light d-flex" faDebounceButton debounceTime="300" (debouncedClick)="clickAtivas.emit()">
         <span class="w-100 text-left">
             Salas Ativas
         </span>
         <span class="text-right w-100">
-            23
+            <span class="badge badge-secondary">{{totalAtivas | async}}</span>
         </span>
     </button>
-    <button type="button" class="btn btn-light d-flex">
+    <button type="button" class="btn btn-light d-flex" faDebounceButton debounceTime="300" (debouncedClick)="clickInativas.emit()">
         <span class="w-100 text-left">
             Salas Inativas
         </span>
         <span class="text-right w-100">
-            5
+            <span class="badge badge-secondary">{{totalInativas | async}}</span>
+        </span>
+    </button>
+    <button type="button" class="btn btn-light d-flex" faDebounceButton debounceTime="300" (debouncedClick)="clickFinalizadas.emit()">
+        <span class="w-100 text-left">
+            Salas Finalizadas
+        </span>
+        <span class="text-right w-100">
+            <span class="badge badge-secondary">{{totalFinalizadas | async}}</span>
         </span>
     </button>
 </div>

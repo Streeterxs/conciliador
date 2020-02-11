@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 import { Sala } from '../../shared/interfaces/sala';
+import { SalasQueryStoreService } from './salas-query-store.service';
 
 const API_URL = environment.ApiLocal;
 @Injectable({
@@ -13,10 +14,22 @@ const API_URL = environment.ApiLocal;
 export class SalasHttpService {
   salasUrl = `${API_URL}/salas`;
 
-  constructor(private http: HttpClient) { }
+  salasQueries;
+  constructor(
+    private http: HttpClient,
+    private _salasQueryStoreService: SalasQueryStoreService
+    ) {
+      this._salasQueryStoreService.salasQueries$.subscribe(salasQueriesParams => {
+        this.salasQueries = salasQueriesParams;
+      });
+  }
 
   getAllSalas(): Observable<Sala[]> {
     return this.http.get<Sala[]>(this.salasUrl + `/get-salas/`);
+  }
+
+  getAllSalasComFiltro(): Observable<HttpResponse<Sala[]>> {
+    return this.http.get<Sala[]>(this.salasUrl + `/get-page-salas/`, {params: this.salasQueries, observe: 'response'});
   }
 
   getSalaById(id: number): Observable<Sala> {

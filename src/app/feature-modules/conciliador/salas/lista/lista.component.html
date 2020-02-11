@@ -1,22 +1,33 @@
 <section>
     <div class="container">
-        <div class="my-4 mb-3 ">
+        <div class="my-4 mb-5 ">
             <h1 class="h1 titleBorder px-3">Salas</h1>
             <h4 class="text-muted">LISTAGEM DE SALAS EXISTENTES</h4>
         </div>
-        <div class="row">
+        <div class="row my-2">
             <div class="col-12 col-md-4">
-                <button type="button" class="btn btn-primary w-100 mb-3 d-flex">
+                <button
+                type="button"
+                class="btn btn-primary w-100 mb-3 d-flex"
+                faDebounceButton
+                debounceTime="200"
+                (debouncedClick)="navigateTo('criar')">
                     <span class="w-100">
                         Criar Sala
                     </span>
                     <fa-icon [icon]="faPlus" class="ml-auto"></fa-icon>
                 </button>
-                <app-aside-filter></app-aside-filter>
+                <app-aside-filter
+                (clickTodas)="filtrarTodas()"
+                (clickAtivas)="filtrarAtivas()"
+                (clickInativas)="filtrarInativas()"
+                (clickFinalizadas)="filtrarFinalizadas()"
+                ></app-aside-filter>
             </div>
             <div class="col-12 col-md-8 row p-0 m-0">
+                <app-desc-filter (formChange)="filtrarSalas($event)" class="mx-2 mb-3 w-100"></app-desc-filter>
                 <div
-                *ngFor="let sala of _salasStoreService.salas$ | async, let i = index"
+                *ngFor="let sala of listaSalas | async, let i = index"
                 [ngClass]="{'col-12': true, 'col-md-12': i === 0, 'firstCard': i === 0, 'col-md-6': i > 0, 'restOfCards': i > 0, 'p-0': true}">
                     <app-sala [sala]="sala" [firstCard]="(i === 0) ? true : false"></app-sala>
                 </div>

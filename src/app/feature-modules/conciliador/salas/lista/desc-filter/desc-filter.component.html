@@ -1,3 +1,11 @@
 <form [formGroup]="descFilterForm">
-    <input type="text" formGroupName="descricao">
+    <div class="row w-100 p-0 m-0">
+        <div class="col p-0 m-0">
+            <input 
+            type="text" 
+            [ngClass]="{'form-control': true}" 
+            formControlName="descricao"
+            placeholder="Pesquisar...">
+        </div>
+    </div>
 </form>

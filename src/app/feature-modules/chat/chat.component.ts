@@ -7,7 +7,6 @@ import { Subscription, throwError } from 'rxjs';
 import { WebSocketSubject } from 'rxjs/webSocket';
 
 import { SalasWebsocketService } from '../../core/salas/salas-websocket.service';
-import { SalasStoreService } from '../../core/salas/salas-store.service';
 import { MessageService } from '../../core/message/message.service';
 import { User } from '../../core/user/user';
 import { UserService } from '../../core/user/user.service';
@@ -17,6 +16,7 @@ import { Sala } from '../../shared/interfaces/sala';
 import { AlertType } from '../../shared/enum/alert-type.enum';
 import { Mensagem } from '../../shared/interfaces/mensagem';
 import { Role } from 'src/app/core/user/role.enum';
+import { SalasFacadeService } from 'src/app/core/salas/salas-facade.service';
 
 
 @Component({
@@ -54,7 +54,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   userSubscription: Subscription;
   constructor(
     private _activatedRoute: ActivatedRoute,
-    private _salasStoreService: SalasStoreService,
+    private _salasFacadeService: SalasFacadeService,
     private _router: Router,
     private _messageService: MessageService,
     private _salasWebsocketService: SalasWebsocketService,
@@ -65,7 +65,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.inicializarMensagensParaOChat();
     this.userSubscription = this._userService.userSubject$.pipe(concatMap(user => {
       this.loggedUser = user;
-      return this._salasStoreService.getSala(this._activatedRoute.snapshot.params.id);
+      return this._salasFacadeService.getSalaById(this._activatedRoute.snapshot.params.id);
     }), concatMap(sala => {
       this.sala = sala;
       this.websocketSubject = this._salasWebsocketService.recebeSalaIdERetornaWebsocketSubject(this.sala.id, this.loggedUser.cpf);
@@ -136,25 +136,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   chamarAtivacaoSala() {
-    this._salasStoreService.enviarAtivacaoDeSala(this.sala).subscribe(sala => {
-      this.sala = sala;
-    }, err => {
-      const message: Message = {
-        strongText: 'Error! ',
-        messageText: 'Não foi possível ativar esta sala.',
-        messageType: AlertType.DANGER,
-        isToShow: true
-      };
-      this._messageService.newMessage = message;
-    }, () => {
-      const message: Message = {
-        strongText: '',
-        messageText: 'Sala foi ativada.',
-        messageType: AlertType.SUCCESS,
-        isToShow: true
-      };
-      this._messageService.newMessage = message;
-    });
+    this._salasFacadeService.ativarSala(this.sala);
   }
 
   enviarNovaMensagem(mensagem: Mensagem) {

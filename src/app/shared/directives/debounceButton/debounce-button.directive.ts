@@ -7,8 +7,8 @@ import { debounceTime } from 'rxjs/operators';
   selector: '[faDebounceButton]'
 })
 export class DebounceButtonDirective implements OnInit, OnDestroy {
-  
-  @Input()debounceTime = 500;
+
+  @Input() debounceTime = 500;
 
   debounceButtonSubject = new Subject();
   debounceButtonSubscription: Subscription;

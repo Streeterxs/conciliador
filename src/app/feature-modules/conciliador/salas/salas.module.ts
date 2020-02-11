@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { NgbTimepickerModule, NgbDatepickerModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -15,6 +16,7 @@ import { SalaCriacaoFormComponent } from './criar/sala-criacao-form/sala-criacao
 import { SalaModule } from 'src/app/shared/components/sala/sala.module';
 import { AsideFilterModule } from './lista/aside-filter/aside-filter.module';
 import { DescFilterModule } from './lista/desc-filter/desc-filter.module';
+import { DirectivesModule } from 'src/app/shared/directives/directives.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { DescFilterModule } from './lista/desc-filter/desc-filter.module';
     SalaModule,
     AsideFilterModule,
     FontAwesomeModule,
-    DescFilterModule
+    DescFilterModule,
+    RouterModule,
+    DirectivesModule
   ]
 })
 export class SalasModule { }

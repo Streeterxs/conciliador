@@ -18,7 +18,8 @@ export class DescFilterComponent implements OnInit {
   ngOnInit() {
     this.descFilterForm = this.gerarDescFiltroForm();
     this.descFilterForm.valueChanges
-    .pipe(debounceTime(500), distinctUntilChanged((prev, curr) => prev.descricao === curr.descricao))
+    .pipe(debounceTime(500),
+    distinctUntilChanged((prev, curr) => JSON.stringify(prev.descricao) === JSON.stringify(curr.descricao)))
     .subscribe(value => {
       if (value) {
         this.formChange.emit(value);

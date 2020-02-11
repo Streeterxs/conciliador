@@ -6,6 +6,7 @@ import { User } from '../../../../core/user/user';
 import { UserService } from '../../../../core/user/user.service';
 import { SalasStoreService } from '../../../../core/salas/salas-store.service';
 import { Role } from 'src/app/core/user/role.enum';
+import { SalasFacadeService } from 'src/app/core/salas/salas-facade.service';
 
 
 
@@ -23,7 +24,7 @@ export class CriarComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private _userService: UserService,
-    private _salasStoreService: SalasStoreService) { }
+    private _salasFacadeService: SalasFacadeService) { }
 
   ngOnInit() {
     this.salaCriacaoForm = this._formBuilder.group({
@@ -52,7 +53,7 @@ export class CriarComponent implements OnInit {
     dateTimeToSubmit.setMinutes(this.salaCriacaoForm.controls.hora.value.minute);
     this.salaCriacaoForm.controls.data.setValue(dateTimeToSubmit);
     delete this.salaCriacaoForm.value.hora;
-    this._salasStoreService.addSala(this.salaCriacaoForm.value);
+    this._salasFacadeService.adicionarSala(this.salaCriacaoForm.value);
   }
 
   updateDropdownList(user: User) {

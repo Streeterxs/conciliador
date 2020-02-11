@@ -29,9 +29,6 @@ export class PainelComponent implements OnInit, OnDestroy {
       console.log(user);
       if (user) {
         this.loggedUser = user;
-        if (!this.loggedUser.roles.includes(Role[Role.ROLE_ADMIN]) || !this.loggedUser.roles.includes(Role[Role.ROLE_MODERATOR])) {
-          this._salasStoreService.getAllSalasToList();
-        }
       }
     });
     this.userIsAdminOrModerator = this._userService.userIsAdmin() || this._userService.userIsModerator();
