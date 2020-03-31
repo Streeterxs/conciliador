@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ViewChild, ElementRef } from '@angular/core';
 
 import { Mensagem } from '../../../shared/interfaces/mensagem';
 import { User } from '../../../core/user/user';
@@ -12,6 +12,8 @@ export class ChatMensagensComponent implements OnInit, OnChanges {
   @Input() mensagens?: Mensagem[] = [];
   @Input() loggedUser?: User;
 
+  @ViewChild('mensagensContainer', {static: false}) mensagensContainer: ElementRef;
+
   constructor() { }
 
   ngOnInit() {
@@ -19,7 +21,10 @@ export class ChatMensagensComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
     if (changes.mensagens) {
-      
+      console.log(this.mensagensContainer);
+      setTimeout(() => {
+        this.mensagensContainer.nativeElement.scrollTop = this.mensagensContainer.nativeElement.scrollHeight;
+      }, 10);
     }
   }
 }

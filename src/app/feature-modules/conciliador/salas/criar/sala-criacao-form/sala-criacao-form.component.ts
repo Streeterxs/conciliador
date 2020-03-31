@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
 
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
@@ -24,7 +23,7 @@ export class SalaCriacaoFormComponent implements OnInit {
 
   selectedItems = [];
   usersSelected: User[] = [];
-  dropdownSettings: IDropdownSettings = {};
+  dropdownSettings = {};
 
   time;
   user;

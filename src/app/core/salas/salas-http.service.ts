@@ -41,6 +41,6 @@ export class SalasHttpService {
   }
 
   ativarSala(idSala): Observable<Sala> {
-    return this.http.patch<Sala>(this.salasUrl + `/salas-chat/${idSala}/`, {is_active: true});
+    return this.http.post<Sala>(this.salasUrl + `/ativar-sala`, idSala);
   }
 }

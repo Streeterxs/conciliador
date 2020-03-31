@@ -10,6 +10,8 @@ import { MessageService } from '../message/message.service';
 import { Message } from '../message/message';
 import { AlertType } from 'src/app/shared/enum/alert-type.enum';
 import { SalasParams } from 'src/app/shared/interfaces/salasParams';
+import { SalasWebsocketService } from './salas-websocket.service';
+import { User } from '../user/user';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +22,8 @@ export class SalasFacadeService {
     private _salasHttpService: SalasHttpService,
     private _salasStoreService: SalasStoreService,
     private _messageService: MessageService,
-    private _salasQueryStoreService: SalasQueryStoreService) { }
+    private _salasQueryStoreService: SalasQueryStoreService,
+    private _salaWebsocketService: SalasWebsocketService) { }
 
   get salas(): Sala[] {
     console.log('entrou salas');
@@ -59,10 +62,14 @@ export class SalasFacadeService {
   }
 
   ativarSala(sala: Sala) {
+    console.log('[Facade Service] ativação de salas ativadas já!', sala);
+    const salaAntiga =
+      this.salas ?
+      this.salas.find(salaEncontrada => salaEncontrada.id === sala.id) :
+      sala;
     sala.is_active = true;
-    const salaAntiga = this.salas.find(salaEncontrada => salaEncontrada.id === sala.id);
     this._salasStoreService.updateSala(sala);
-    this._salasHttpService.ativarSala(sala).subscribe(sala => {
+    this._salasHttpService.ativarSala(sala.id).subscribe(sala => {
       this._salasStoreService.updateSala(sala);
     }, err => {
       const message: Message = {
@@ -73,6 +80,7 @@ export class SalasFacadeService {
       };
       this._messageService.newMessage = message;
       this._salasStoreService.updateSala(salaAntiga);
+      sala.is_active = false;
     }, () => {
       const message: Message = {
         strongText: '',
@@ -139,6 +147,18 @@ export class SalasFacadeService {
   removerFiltragem() {
     this._salasQueryStoreService.removerFiltragem();
     this.atualizarListagem();
+  }
+
+  conectarWebsocketPorSala() {
+    this._salaWebsocketService.connect();
+  }
+
+  canalSalaMensagensWebsocket(sala: Sala) {
+    return this._salaWebsocketService.watcherMensagensPorSala(sala.id);
+  }
+
+  publicarMensagemChat(user: User, mensagem, sala: Sala) {
+    this._salaWebsocketService.publishMessage(user.cpf, mensagem, sala.id);
   }
 
 }

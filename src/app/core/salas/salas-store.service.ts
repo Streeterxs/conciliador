@@ -5,7 +5,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Sala } from '../../shared/interfaces/sala';
 import { SalasHttpService } from './salas-http.service';
 import { User } from '../user/user';
-import { SalasWebsocketService } from './salas-websocket.service';
 
 @Injectable({
   providedIn: 'root'
@@ -30,9 +29,7 @@ export class SalasStoreService {
   private _totalPages: BehaviorSubject<number> = new BehaviorSubject(0);
   totalPages$ = this._totalPages.asObservable();
 
-  constructor(
-    private _salasWebsocketService: SalasWebsocketService
-    ) {
+  constructor() {
    }
 
    get salas(): Sala[] {
@@ -84,7 +81,10 @@ export class SalasStoreService {
    }
 
    updateSala(salaToUpdate: Sala) {
-     const index = this.salas.findIndex(sala => sala.id === salaToUpdate.id);
+     const index =
+      this.salas ?
+      this.salas.findIndex(sala => sala.id === salaToUpdate.id) :
+      null;
      if (index > 0) {
        this.salas[index] = salaToUpdate;
        this.salas = [...this.salas];

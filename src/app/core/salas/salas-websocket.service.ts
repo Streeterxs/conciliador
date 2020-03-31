@@ -1,39 +1,64 @@
 import { Injectable } from '@angular/core';
 
-import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { environment } from 'src/environments/environment';
+import { RxStomp } from '@stomp/rx-stomp';
 import { Mensagem } from '../../shared/interfaces/mensagem';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SalasWebsocketService {
-
-  webSocketSubject = webSocket(environment.wsApiLocal);
-  path = `${environment.wsApiLocal}/ws/chat/`;
+  rxStomp = new RxStomp();
+  path = `${environment.wsApiLocal}/websocket`;
 
   constructor() { }
 
-  recebeSalaIdERetornaWebsocketSubject(salaId: number, loggedUserCpf: string) {
-    const websocketSubject = webSocket(this.path + `${salaId}/`);
-    this.checarPermissaoWebsocket(websocketSubject, salaId, loggedUserCpf);
-    return websocketSubject;
+  connect() {
+    const stompConfig = {
+      // Typically login, passcode and vhost
+      // Adjust these for your broker
+      /* connectHeaders: {
+        login: "guest",
+        passcode: "guest"
+      }, */
+
+      // Broker URL, should start with ws:// or wss:// - adjust for your broker setup
+      brokerURL: this.path,
+
+      // Keep it off for production, it can be quit verbose
+      // Skip this key to disable
+      debug: function (str) {
+        console.log('STOMP: ' + str);
+      },
+
+      // If disconnected, it will retry after 200ms
+      reconnectDelay: 3000,
+    };
+
+    this.rxStomp.configure(stompConfig);
+    this.rxStomp.activate();
   }
 
-  recebeWebsocketSubjectEMensagemEEnviaAMensagem(websocketSubject: WebSocketSubject<any>, websocketMessageChat: Mensagem) {
-    console.log(websocketMessageChat);
-    websocketSubject.next({command: 'new_message', message: websocketMessageChat});
+  watcherMensagensPorSala(idSala) {
+    return this.rxStomp.watch(`/topic/public/${idSala}`);
   }
 
-  recebeWebsocketEDesconecta(websocketSubject: WebSocketSubject<any>) {
-    websocketSubject.complete();
+  userJoin(cpf, idSala) {
+    const objPublishUserJoin = {
+      sender: cpf,
+      type: 'JOIN',
+      room: idSala
+    };
+    this.rxStomp.publish({destination: '/app/chat.addUser', body: JSON.stringify(objPublishUserJoin)});
   }
 
-  checarPermissaoWebsocket(websocketSubject: WebSocketSubject<any>, idSala: number, cpf: string) {
-    websocketSubject.next({command: 'check_permission', idSala: idSala, cpf: cpf});
-  }
-
-  buscarMensagens(websocketSubject: WebSocketSubject<any>, idSala: number) {
-    websocketSubject.next({command: 'fetch_messages', idSala: idSala});
+  publishMessage(cpf, mensagem, idSala) {
+    const chatMessage = {
+      sender: cpf,
+      content: mensagem,
+      type: 'CHAT',
+      room: idSala
+    };
+    this.rxStomp.publish({destination: '/app/chat.sendMessage', body: JSON.stringify(chatMessage)});
   }
 }

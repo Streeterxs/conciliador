@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 import { concatMap, catchError } from 'rxjs/operators';
-import { Subscription, throwError } from 'rxjs';
+import { Subscription, throwError, Observable } from 'rxjs';
 import { WebSocketSubject } from 'rxjs/webSocket';
 
 import { SalasWebsocketService } from '../../core/salas/salas-websocket.service';
@@ -17,6 +17,7 @@ import { AlertType } from '../../shared/enum/alert-type.enum';
 import { Mensagem } from '../../shared/interfaces/mensagem';
 import { Role } from 'src/app/core/user/role.enum';
 import { SalasFacadeService } from 'src/app/core/salas/salas-facade.service';
+import { IMessage } from '@stomp/stompjs';
 
 
 @Component({
@@ -48,7 +49,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   loggedUser: User;
   messageObj: Message;
 
-  websocketSubject: WebSocketSubject<any>;
+  websocketSubject: Observable<IMessage>;
 
   messageSubscription: Subscription;
   userSubscription: Subscription;
@@ -57,7 +58,6 @@ export class ChatComponent implements OnInit, OnDestroy {
     private _salasFacadeService: SalasFacadeService,
     private _router: Router,
     private _messageService: MessageService,
-    private _salasWebsocketService: SalasWebsocketService,
     private _userService: UserService
     ) {}
 
@@ -66,17 +66,11 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.userSubscription = this._userService.userSubject$.pipe(concatMap(user => {
       this.loggedUser = user;
       return this._salasFacadeService.getSalaById(this._activatedRoute.snapshot.params.id);
-    }), concatMap(sala => {
+    }), catchError(error => throwError(error))).subscribe(sala => {
+      console.log(sala);
       this.sala = sala;
-      this.websocketSubject = this._salasWebsocketService.recebeSalaIdERetornaWebsocketSubject(this.sala.id, this.loggedUser.cpf);
-      return this.websocketSubject;
-    }), catchError(error => throwError(error))).subscribe(message => {
-      if (message.command === "fetchMessages") {
-        this._salasWebsocketService.buscarMensagens(this.websocketSubject, this.sala.id);
-      } else if (message.command === 'new_message') {
-        this.sala.mensagens = this.sala.mensagens.concat(message.message);
-      }
-      console.log('[Chat Component] mensagem do websocket: ', message);
+      this._salasFacadeService.conectarWebsocketPorSala();
+      this.connectarCanalSala(sala);
     }, err => {
       if (err.status === 404) {
         const message: Message = {
@@ -140,6 +134,34 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   enviarNovaMensagem(mensagem: Mensagem) {
-    this._salasWebsocketService.recebeWebsocketSubjectEMensagemEEnviaAMensagem(this.websocketSubject, mensagem);
+    this._salasFacadeService.publicarMensagemChat(this.loggedUser, mensagem, this.sala);
+  }
+
+  connectarCanalSala(sala: Sala) {
+    this._salasFacadeService.canalSalaMensagensWebsocket(sala).subscribe(mensagem => {
+      console.log(mensagem);
+      const parsedMessage = JSON.parse(mensagem.body);
+      console.log(parsedMessage);
+      this.switchMessageType(parsedMessage,
+        () => {},
+        () => {},
+        () => {
+          this.sala.mensagens = this.sala.mensagens.concat(parsedMessage.mensagem);
+        });
+    });
+  }
+
+  switchMessageType(message, callbackJoin, callbackLeave, callbackChat) {
+    switch(message.type) {
+      case 'JOIN':
+        callbackJoin();
+        break;
+      case 'LEAVE':
+        callbackLeave();
+        break;
+      case 'CHAT':
+        callbackChat();
+        break;
+    }
   }
 }

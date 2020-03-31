@@ -9,7 +9,7 @@
                 <li *ngIf="userIsLogged" [ngClass]="active==='Painel'? 'nav-item active': 'nav-item'">
                     <a class="nav-link navbarLink" routerLink="/conciliador/painel">Painel</a>
                 </li>
-                <li *ngIf="userIsLogged && (loggedUser?.is_admin || loggedUser?.is_moderador)" [ngClass]="active==='Salas'? 'nav-item active': 'nav-item'">
+                <li *ngIf="userIsLogged" [ngClass]="active==='Salas'? 'nav-item active': 'nav-item'">
                     <a class="nav-link navbarLink" routerLink="/conciliador/salas/lista">Salas</a>
                 </li>
             </ul>

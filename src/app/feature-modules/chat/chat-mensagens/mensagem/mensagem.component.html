@@ -3,8 +3,8 @@
     <div [ngClass]="{'card': true, 'caixaMensagemParaDono': isTheOwner, 'caixaMensagemOutros': !isTheOwner}">
         <div class="card-body">
             <h4 class="card-title">{{usuarioCriador?.nome}}</h4>
-            <h6 class="card-subtitle mb-2">{{mensagem?.date | date: 'dd/MM/yyyy HH:mm'}}</h6>
-            <p class="card-text">{{mensagem?.texto}} </p>
+            <h6 class="card-subtitle mb-2 fontSizeSmall">{{mensagem?.data | date: 'dd/MM/yyyy HH:mm'}}</h6>
+            <p class="card-text">{{mensagem?.mensagem}} </p>
         </div>
     </div>
 </div>

@@ -24,14 +24,13 @@ export class ChatChatBoxComponent implements OnInit {
 
   createChatBoxForm() {
     return this._formBuilder.group({
-      owner: this.loggedUser.id,
       texto: ['']
     });
   }
 
   onNgSubmit(event) {
     if (this.isActive) {
-      this.emitirNovaMensagem.emit(this.chatBoxSendForm.value);
+      this.emitirNovaMensagem.emit(this.chatBoxSendForm.controls.texto.value);
       this.chatBoxSendForm.controls.texto.reset();
     } else {
       alert('A mensagem não pôde ser enviada');

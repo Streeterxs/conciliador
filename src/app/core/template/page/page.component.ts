@@ -16,6 +16,8 @@ export class PageComponent implements OnInit {
 
   userIsLogged = false;
   loggedUser: User;
+  isUserStaff = false;
+
   constructor(
     private _userService: UserService,
     private _activeRoute: ActivatedRoute,
@@ -29,6 +31,7 @@ export class PageComponent implements OnInit {
       if (user) {
         this.loggedUser = user;
         this.userIsLogged = this._userService.isLogged();
+        this.isUserStaff = this._userService.isUserStaff();
       } else {
         this.userIsLogged = false;
       }

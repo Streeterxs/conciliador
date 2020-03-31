@@ -1,4 +1,8 @@
-<app-header [userIsLogged]="userIsLogged" [loggedUser]="loggedUser" (logoutEmitter)="logout()"></app-header>
+<app-header
+[userIsLogged]="userIsLogged"
+[loggedUser]="loggedUser"
+(logoutEmitter)="logout()"
+[isUserStaff]="isUserStaff"></app-header>
 <section class="container sectionContent">
     <ng-content></ng-content>
 </section>

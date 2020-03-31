@@ -14,6 +14,7 @@ import { MensagemComponent } from './chat-mensagens/mensagem/mensagem.component'
 import { DirectivesModule } from '../../shared/directives/directives.module';
 import { MessageModule } from '../../shared/components/message/message.module';
 import { ChatRoutingModule } from './chat-routing.module';
+import { SortMessagesModule } from './chat-mensagens/sort-messages/sort-messages.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ChatRoutingModule } from './chat-routing.module';
     ReactiveFormsModule,
     FontAwesomeModule,
     DirectivesModule,
-    MessageModule
+    MessageModule,
+    SortMessagesModule
   ]
 })
 export class ChatModule { }

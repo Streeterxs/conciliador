@@ -1,8 +1,8 @@
 <div class="chatContainer">
-    <app-chat-navbar class="navbarChatComponent" [loggedUser]="loggedUser" (ativacaoEmitter)="chamarAtivacaoSala()"></app-chat-navbar>
+    <app-chat-navbar class="navbarChatComponent" (ativacaoEmitter)="chamarAtivacaoSala()"></app-chat-navbar>
     <div class="row contentContainer">
         <div class="my-2 col-12 col-sm-9 h-100">
-            <app-chat-mensagens [mensagens]="sala?.messages" [loggedUser]="loggedUser"></app-chat-mensagens>
+            <app-chat-mensagens [mensagens]="sala?.mensagens" [loggedUser]="loggedUser"></app-chat-mensagens>
         </div>
         <div class="my-2 col-sm-3 row p-0 h-100">
             <div class="pb-1 col-12 h-50">

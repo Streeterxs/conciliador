@@ -20,9 +20,8 @@ export class MensagemComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     console.log(this.mensagem);
-    this._userService.getUserById(this.mensagem.criador.id).subscribe(usuario => {
-      this.usuarioCriador = usuario;
-    });
+    this.usuarioCriador = {...this.mensagem.criador};
+    console.log(this.usuarioCriador);
   }
 
   ngOnChanges(changes: import('@angular/core').SimpleChanges): void {

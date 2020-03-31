@@ -12,6 +12,7 @@ import { RoutingService } from '../../routing/routing.service';
 export class HeaderComponent implements OnInit {
   @Input() userIsLogged? = false;
   @Input() loggedUser?: User;
+  @Input() isUserStaff?: boolean;
 
   active = null;
 
